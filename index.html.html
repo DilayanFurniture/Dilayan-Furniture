@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="si" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>ඩිලායන් ගෘහ භාණ්ඩ | Dilayan Furniture Warakapola</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+Sinhala:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Serif Sinhala', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .sub-view { display: none; }
+    .sub-view.active { display: block; }
+    .modal { display: none; }
+    .modal.active { display: flex; }
+    .hero-title {
+      line-height: 1.75 !important;
+    }
+    .cat-section-bg {
+      transition: background-image 0.4s ease, filter 0.3s ease;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-[#FAF8F5] text-[#2D2825] antialiased selection:bg-[#8B5A2B] selection:text-white overflow-x-hidden flex flex-col min-h-screen">
+
+  <!-- ================= TOP ANNOUNCEMENT BAR ================= -->
+  <div class="bg-[#5C3D2E] text-white px-3 py-2 text-[11px] md:text-xs border-b border-[#4A3024] relative z-40">
+    <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+      <div>
+        <span id="topBarInfo" data-si="📍 ඇත්නාවල, වරකපොල | 📞 077 2256044 | ⏰ පෙ.ව. 8:00 - ප.ව. 6:30" data-en="📍 Etnawala, Warakapola | 📞 077 2256044 | ⏰ 8:00 AM - 6:30 PM">📍 ඇත්නාවල, වරකපොල | 📞 <strong>077 2256044</strong> | ⏰ පෙ.ව. 8:00 - ප.ව. 6:30</span>
+      </div>
+      <div class="flex flex-wrap justify-center items-center gap-2 md:gap-3">
+        <button onclick="toggleLanguage()" class="bg-[#D4A373] text-[#2D1B14] px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-[#c29263] transition flex items-center gap-1 cursor-pointer">
+          🌐 <span id="langBtnText">English</span>
+        </button>
+        <a href="https://www.facebook.com/profile.php?id=100076049183136" target="_blank" rel="noreferrer" class="bg-[#1877F2] text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 transition" data-si="ෆේස්බුක් පිටුව" data-en="Facebook Page">
+          Facebook Page
+        </a>
+        <a href="tel:0772256044" class="font-bold text-[#D4A373]">📞 077 2256044</a>
+        <button id="adminLoginHeaderBtn" onclick="openAdminLoginModal()" class="bg-[#3A261C] hover:bg-[#2D1B14] text-[#D4A373] border border-[#7A5843] px-2.5 py-1 rounded-md text-[10px] font-bold transition cursor-pointer" data-si="🔐 Admin" data-en="🔐 Admin">
+          🔐 Admin
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ADMIN CONTROL BAR ================= -->
+  <div id="adminTopControlBar" class="hidden bg-[#3A261C] text-white py-2 px-4 border-b border-[#5C3D2E] relative z-40">
+    <div class="container mx-auto flex flex-wrap justify-between items-center gap-3 text-xs">
+      <span class="font-bold text-[#D4A373]">⚙️ Admin Control Panel (Manager Mode Active):</span>
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="openLogoModal()" class="bg-[#D4A373] text-[#2D1B14] px-3.5 py-2 rounded-xl font-bold hover:bg-[#c29263] cursor-pointer">
+          🏷️ Change Logos
+        </button>
+        <button onclick="openCoverPhotoModal()" class="bg-[#8B5A2B] text-white px-3.5 py-2 rounded-xl font-bold hover:bg-[#724820] cursor-pointer">
+          🖼️ Change & Adjust Covers
+        </button>
+        <button onclick="openTimberPriceModal()" class="bg-[#8B5A2B] text-white px-3.5 py-2 rounded-xl font-bold hover:bg-[#724820] cursor-pointer">
+          🪵 Manage Wood Prices
+        </button>
+        <button onclick="openChangePassModal()" class="bg-[#8B5A2B] text-white px-3.5 py-2 rounded-xl font-bold hover:bg-[#724820] cursor-pointer">
+          🔒 Change Password
+        </button>
+        <button onclick="logoutAdmin()" class="bg-red-700 text-white px-3.5 py-2 rounded-xl font-bold hover:bg-red-800 cursor-pointer">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= HEADER NAVIGATION ================= -->
+  <header class="bg-white border-b border-[#E8DFD5] sticky top-0 z-40 shadow-sm">
+    <div class="container mx-auto px-3 md:px-4 py-3 flex items-center justify-between gap-3">
+      <div onclick="switchTab('home')" class="cursor-pointer flex items-center gap-3 shrink-0">
+        <img id="headerLogoImg" src="https://i.ibb.co/3s8sR45/FB-IMG-1744563822704.jpg" alt="Dilayan Furniture Logo" class="w-10 h-10 md:w-12 md:h-12 rounded-xl object-contain border border-[#E0D5C7] shadow-sm p-0.5" />
+        <div>
+          <span class="font-black text-base md:text-2xl text-[#3A261C] tracking-tight block leading-tight" data-si="ඩිලායන් ගෘහ භාණ්ඩ" data-en="Dilayan Furniture">ඩිලායන් ගෘහ භාණ්ඩ</span>
+        </div>
+      </div>
+
+      <!-- Desktop Nav Tabs -->
+      <nav class="hidden lg:flex items-center gap-1.5">
+        <button id="nav-home" onclick="switchTab('home')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-[#5C3D2E] text-white cursor-pointer transition" data-si="මුල් පිටුව" data-en="Home">මුල් පිටුව</button>
+        <button id="nav-about" onclick="switchTab('about')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C4F46] hover:bg-[#F4EAD4] cursor-pointer transition" data-si="අප ගැන" data-en="About Us">අප ගැන</button>
+        <button id="nav-workshop" onclick="switchTab('workshop')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C4F46] hover:bg-[#F4EAD4] cursor-pointer transition" data-si="වඩු මඩුව" data-en="Wood Workshop">වඩු මඩුව</button>
+        <button id="nav-shop" onclick="switchTab('shop')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C4F46] hover:bg-[#F4EAD4] cursor-pointer transition" data-si="ප්‍රදර්ශනාගාරය" data-en="Showroom">ප්‍රදර්ශනාගාරය</button>
+        <button id="nav-timber" onclick="switchTab('timber')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C4F46] hover:bg-[#F4EAD4] cursor-pointer transition" data-si="ලී ගබඩාව" data-en="Timber Depot">ලී ගබඩාව</button>
+        <button id="nav-contact" onclick="switchTab('contact')" class="nav-btn px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C4F46] hover:bg-[#F4EAD4] cursor-pointer transition" data-si="සම්බන්ධ වන්න" data-en="Contact Us">සම්බන්ධ වන්න</button>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-2">
+        <a href="https://wa.me/94772256044" target="_blank" rel="noopener noreferrer" class="bg-[#25D366] hover:bg-[#1EBE5A] text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow shrink-0 inline-flex items-center gap-1.5 transition">
+          <span>💬 WhatsApp</span>
+        </a>
+        <button onclick="toggleMobileMenu()" class="lg:hidden bg-[#FAF8F5] border border-[#E0D5C7] p-2.5 rounded-xl text-[#3A261C] font-bold text-base cursor-pointer">
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-[#E8DFD5] px-4 py-3 space-y-2 shadow-lg">
+      <button onclick="switchTab('home'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-[#F4EAD4] block" data-si="මුල් පිටුව" data-en="Home">මුල් පිටුව</button>
+      <button onclick="switchTab('about'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-[#F4EAD4] block" data-si="අප ගැන" data-en="About Us">අප ගැන</button>
+      <button onclick="switchTab('workshop'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-[#F4EAD4] block" data-si="වඩු මඩුව" data-en="Wood Workshop">වඩු මඩුව</button>
+      <button onclick="switchTab('shop'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-[#F4EAD4] block" data-si="ප්‍රදර්ශනාගාරය" data-en="Showroom">ප්‍රදර්ශනාගාරය</button>
+      <button onclick="switchTab('timber'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-[#F4EAD4] block" data-si="ලී ගබඩාව" data-en="Timber Depot">ලී ගබඩාව</button>
+      <button onclick="switchTab('contact'); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-[#F4EAD4] block" data-si="සම්බන්ධ වන්න" data-en="Contact Us">සම්බන්ධ වන්න</button>
+      <button onclick="openAdminLoginModal(); toggleMobileMenu();" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold bg-[#3A261C] text-[#D4A373] block mt-2 border border-[#7A5843]" data-si="🔐 ඇඩ්මින් පිවිසුම" data-en="🔐 Admin Login">🔐 ඇඩ්මින් පිවිසුම</button>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="flex-grow">
+    <!-- ================= TAB 1: HOME ================= -->
+    <div id="tab-home" class="tab-content active">
+      <div id="cover-home" class="bg-[#2D1B14] text-white py-20 md:py-32 text-center px-4 relative overflow-hidden bg-cover bg-center transition-all duration-300" style="background-image: url('https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1600&q=80');">
+        <div id="cover-home-overlay" class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="max-w-3xl mx-auto space-y-4 relative z-10 drop-shadow-md">
+          <span class="bg-[#8B5A2B] text-[#F3E9DD] text-xs font-bold px-4 py-1.5 rounded-full uppercase inline-block shadow" data-si="වසර 15ක විශ්වාසනීය අත්දැකීම්" data-en="15+ Years of Trusted Experience">වසර 15ක විශ්වාසනීය අත්දැකීම්</span>
+          <h1 class="hero-title text-2xl sm:text-4xl md:text-5xl font-black text-white drop-shadow-lg" data-si="ඔබේ නිවසට අවශ්‍ය සියලුම උසස් දැව නිර්මාණ සහ ගෘහ භාණ්ඩ" data-en="All High-Quality Wood Creations & Furniture for Your Home">ඔබේ නිවසට අවශ්‍ය සියලුම උසස් දැව නිර්මාණ සහ ගෘහ භාණ්ඩ</h1>
+          <p class="text-xs sm:text-sm md:text-lg text-[#F4EAD4] font-medium max-w-2xl mx-auto drop-shadow" data-si="උළුවහු, දොර, ජනෙල්, වහලවල්, පඩිපෙළ, වුඩ් ෆ්ලෝරින් සහ සියලුම ගෘහ භාණ්ඩ එකම වහලක් යටින්." data-en="Doors, windows, roofs, staircases, wooden flooring, and all furniture under one roof.">උළුවහු, දොර, ජනෙල්, වහලවල්, පඩිපෙළ, වුඩ් ෆ්ලෝරින් සහ සියලුම ගෘහ භාණ්ඩ එකම වහලක් යටින්.</p>
+          <div class="flex justify-center gap-3 pt-4 flex-wrap">
+            <button onclick="switchTab('shop')" class="bg-[#8B5A2B] hover:bg-[#724820] text-white px-6 py-3.5 rounded-xl font-bold text-xs shadow-lg cursor-pointer transition" data-si="ප්‍රදර්ශනාගාරය බලන්න" data-en="View Showroom">ප්‍රදර්ශනාගාරය බලන්න</button>
+            <button onclick="switchTab('contact')" class="bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/30 text-white px-6 py-3.5 rounded-xl font-bold text-xs cursor-pointer transition shadow" data-si="මිල ගණන් ලබාගන්න" data-en="Get Price Estimate">මිල ගණන් ලබාගන්න</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divisions Overview -->
+      <div class="container mx-auto px-4 py-12 md:py-16 grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+        <div onclick="switchTab('workshop')" class="bg-white p-6 md:p-8 rounded-3xl border border-[#E0D5C7] shadow-sm hover:shadow-xl transition cursor-pointer">
+          <span class="text-3xl mb-4 block">🔨</span>
+          <h3 class="text-lg md:text-xl font-bold text-[#3A261C] mb-2" data-si="යාන්ත්‍රික වඩු මඩුව" data-en="Mechanical Wood Workshop">යාන්ත්‍රික වඩු මඩුව</h3>
+          <p class="text-xs text-gray-600 leading-relaxed mb-4" data-si="උළුවහු, දොර, ජනෙල්, වහලවල් ගැසීම, පඩිපෙළවල් සහ ලී ෆ්ලෝරින් කිරීමේ සියලුම වැඩ." data-en="Doors, windows, roofing, staircases, and complete woodwork services.">උළුවහු, දොර, ජනෙල්, වහලවල් ගැසීම, පඩිපෙළවල් සහ ලී ෆ්ලෝරින් කිරීමේ සියලුම වැඩ.</p>
+          <span class="text-xs font-bold text-[#8B5A2B]" data-si="වැඩිදුර විස්තර →" data-en="Learn More →">වැඩිදුර විස්තර →</span>
+        </div>
+        <div onclick="switchTab('shop')" class="bg-white p-6 md:p-8 rounded-3xl border border-[#E0D5C7] shadow-sm hover:shadow-xl transition cursor-pointer">
+          <span class="text-3xl mb-4 block">🛋️</span>
+          <h3 class="text-lg md:text-xl font-bold text-[#3A261C] mb-2" data-si="ගෘහ භාණ්ඩ ප්‍රදර්ශනාගාරය" data-en="Furniture Showroom">ගෘහ භාණ්ඩ ප්‍රදර්ශනාගාරය</h3>
+          <p class="text-xs text-gray-600 leading-relaxed mb-4" data-si="සෝෆා සෙට්, තේක්ක ඇඳන්, මෙට්ට, අල්මාරි, කන්නාඩි මේස, කෑම මේස සහ පුටු අලෙවිය." data-en="Sofas, teak beds, mattresses, wardrobes, dressing tables, dining sets.">සෝෆා සෙට්, තේක්ක ඇඳන්, මෙට්ට, අල්මාරි, කන්නාඩි මේස, කෑම මේස සහ පුටු අලෙවිය.</p>
+          <span class="text-xs font-bold text-[#8B5A2B]" data-si="වැඩිදුර විස්තර →" data-en="Learn More →">වැඩිදුර විස්තර →</span>
+        </div>
+        <div onclick="switchTab('timber')" class="bg-white p-6 md:p-8 rounded-3xl border border-[#E0D5C7] shadow-sm hover:shadow-xl transition cursor-pointer sm:col-span-2 md:col-span-1">
+          <span class="text-3xl mb-4 block">🪵</span>
+          <h3 class="text-lg md:text-xl font-bold text-[#3A261C] mb-2" data-si="තොග ලී ගබඩාව" data-en="Wholesale Timber Depot">තොග ලී ගබඩාව</h3>
+          <p class="text-xs text-gray-600 leading-relaxed mb-4" data-si="කොස්, නදුන්, තේක්ක ඇතුළු උසස්ම තත්ත්වයේ දැව සහ ලෑලි තොග පිටින් ලබාගැනීමේ පහසුකම." data-en="High-quality jackwood, mahogany, teak timber planks and wholesale stock.">කොස්, නදුන්, තේක්ක ඇතුළු උසස්ම තත්ත්වයේ දැව සහ ලෑලි තොග පිටින් ලබාගැනීමේ පහසුකම.</p>
+          <span class="text-xs font-bold text-[#8B5A2B]" data-si="වැඩිදුර විස්තර →" data-en="Learn More →">වැඩිදුර විස්තර →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 2: ABOUT ================= -->
+    <div id="tab-about" class="tab-content">
+      <div id="cover-about" class="bg-[#2D1B14] text-white py-16 md:py-24 text-center px-4 relative overflow-hidden bg-cover bg-center transition-all duration-300" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80');">
+        <div id="cover-about-overlay" class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="max-w-3xl mx-auto relative z-10 drop-shadow-md">
+          <span class="text-xs font-bold text-[#D4A373] uppercase tracking-wider block mb-2 drop-shadow" data-si="අපගේ අත්දැකීම් සහ විශ්වාසය" data-en="Our Experience & Trust">අපගේ අත්දැකීම් සහ විශ්වාසය</span>
+          <h1 class="hero-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg" data-si="වසර 15කට වැඩි කාලයක් පුරා ඇත්නාවල, වරකපොල දී ඉටුකළ විශිෂ්ට සේවාව" data-en="Over 15 Years of Excellence in Etnawala, Warakapola">වසර 15කට වැඩි කාලයක් පුරා ඇත්නාවල, වරකපොල දී ඉටුකළ විශිෂ්ට සේවාව</h1>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4 py-12 md:py-16 max-w-5xl space-y-12">
+        <div class="bg-white p-6 md:p-10 rounded-3xl border border-[#E0D5C7] shadow-sm space-y-4">
+          <h2 class="text-xl md:text-2xl font-black text-[#3A261C]" data-si="විශ්වාසනීය ලී නිර්මාණකරණයේ ප්‍රමුඛතම නාමය" data-en="The Leading Name in Trusted Woodcrafting">විශ්වාසනීය ලී නිර්මාණකරණයේ ප්‍රමුඛතම නාමය</h2>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed" data-si="ඇත්නාවල, වරකපොල පිහිටි ඩිලායන් ෆර්නිචර් ආයතනය වසර 15කට වැඩි කාලයක් තිස්සේ උසස්ම තත්ත්වයේ දැව නිර්මාණ, තොග ලී සැපයුම සහ නිවසට අවශ්‍ය සියලුම ගෘහ භාණ්ඩ අලෙවියේ නිරත ප්‍රමුඛතම විශ්වාසනීය ආයතනයකි. පාරම්පරික වඩු ශිල්පීය නිපුණතාවය සහ නවීන තාක්ෂණික යන්ත්‍ර සූත්‍ර සංකලනය කරමින් අපගේ පාරිභෝගිකයන්ගේ සිහින නිවස සාක්ෂාත් කිරීමට අපි කැපවී සිටිමු." data-en="Dilayan Furniture in Etnawala, Warakapola is a leading establishment with over 15 years of excellence in crafting high-quality woodwork, supplying wholesale timber, and offering premium home furniture. Combining traditional craftsmanship with modern machinery, we bring your dream home concepts into reality.">
+            ඇත්නාවල, වරකපොල පිහිටි ඩිලායන් ෆර්නිචර් ආයතනය වසර 15කට වැඩි කාලයක් තිස්සේ උසස්ම තත්ත්වයේ දැව නිර්මාණ, තොග ලී සැපයුම සහ නිවසට අවශ්‍ය සියලුම ගෘහ භාණ්ඩ අලෙවියේ නිරත ප්‍රමුඛතම විශ්වාසනීය ආයතනයකි. පාරම්පරික වඩු ශිල්පීය නිපුණතාවය සහ නවීන තාක්ෂණික යන්ත්‍ර සූත්‍ර සංකලනය කරමින් අපගේ පාරිභෝගිකයන්ගේ සිහින නිවස සාක්ෂාත් කිරීමට අපි කැපවී සිටිමු.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-stretch">
+          <div class="relative bg-gradient-to-br from-[#2D1B14] via-[#3A261C] to-[#5C3D2E] text-white p-8 rounded-3xl shadow-xl border border-[#D4A373]/30 flex flex-col justify-between overflow-hidden group hover:shadow-2xl hover:border-[#D4A373] transition duration-300">
+            <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-[#D4A373]/10 rounded-full blur-2xl group-hover:bg-[#D4A373]/20 transition"></div>
+            <div class="space-y-4 relative z-10">
+              <div class="flex items-center justify-between">
+                <span class="text-4xl bg-white/10 p-3 rounded-2xl backdrop-blur-md border border-white/10 shadow-inner">👁️</span>
+                <span class="text-[10px] font-black tracking-widest text-[#D4A373] uppercase bg-[#8B5A2B]/40 px-3 py-1 rounded-full border border-[#D4A373]/30">OUR VISION</span>
+              </div>
+              <h3 class="text-xl md:text-2xl font-black text-[#D4A373] tracking-wide" data-si="විෂන් එක (Our Vision)" data-en="Our Vision">විෂන් එක (Our Vision)</h3>
+              <p class="text-xs md:text-sm text-[#E8DFD5] leading-relaxed font-normal" data-si="ශ්‍රී ලංකාවේ ප්‍රමිතියෙන් ඉහළම සහ පරම්පරා ගණනාවක් පවතින දැව නිර්මාණ සපයන සන්නාමය බවට පත්වීමේ අභිප්‍රාය." data-en="To become the most trusted timber brand in Sri Lanka, delivering highest quality and long-lasting wooden creations spanning across generations.">
+                ශ්‍රී ලංකාවේ ප්‍රමිතියෙන් ඉහළම සහ පරම්පරා ගණනාවක් පවතින දැව නිර්මාණ සපයන සන්නාමය බවට පත්වීමේ අභිප්‍රාය.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-white/10 mt-6 flex items-center justify-between text-[11px] font-bold text-[#D4A373]/80">
+              <span>✨ ශ්‍රී ලංකාවේ ප්‍රමුඛතම දැව සන්නාමය</span>
+              <span>01</span>
+            </div>
+          </div>
+
+          <div class="relative bg-gradient-to-br from-[#8B5A2B] via-[#724820] to-[#5C3D2E] text-white p-8 rounded-3xl shadow-xl border border-[#F4EAD4]/30 flex flex-col justify-between overflow-hidden group hover:shadow-2xl hover:border-[#F4EAD4] transition duration-300">
+            <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition"></div>
+            <div class="space-y-4 relative z-10">
+              <div class="flex items-center justify-between">
+                <span class="text-4xl bg-white/10 p-3 rounded-2xl backdrop-blur-md border border-white/10 shadow-inner">🎯</span>
+                <span class="text-[10px] font-black tracking-widest text-[#F4EAD4] uppercase bg-black/20 px-3 py-1 rounded-full border border-white/20">OUR MISSION</span>
+              </div>
+              <h3 class="text-xl md:text-2xl font-black text-[#F4EAD4] tracking-wide" data-si="මිෂන් එක (Our Mission)" data-en="Our Mission">මිෂන් එක (Our Mission)</h3>
+              <p class="text-xs md:text-sm text-[#F4EAD4]/90 leading-relaxed font-normal" data-si="පාරිභෝගික අවශ්‍යතාවන්ට මනාව සවන් දී උසස්ම දැවයෙන් නිවැරදි මිනුම් සහ නිමාවෙන් යුතුව සාධාරණ මිලට සේවාවන් සැලසීම." data-en="To attentively listen to customer requirements and deliver services using premium timber with precise measurements, superior finish, and fair pricing.">
+                පාරිභෝගික අවශ්‍යතාවන්ට මනාව සවන් දී උසස්ම දැවයෙන් නිවැරදි මිනුම් සහ නිමාවෙන් යුතුව සාධාරණ මිලට සේවාවන් සැලසීම.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-white/10 mt-6 flex items-center justify-between text-[11px] font-bold text-[#F4EAD4]/80">
+              <span>🤝 විශ්වාසනීය සහ සාධාරණ සේවාව</span>
+              <span>02</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-[#F4EAD4] p-6 rounded-2xl border border-[#D4A373]">
+          <h3 class="font-bold text-[#3A261C] mb-1" data-si="📍 සම්බන්ධ කරගන්න:" data-en="📍 Contact Us:">📍 සම්බන්ධ කරගන්න:</h3>
+          <p class="text-xs font-bold text-[#8B5A2B]" data-si="දුරකථන අංකය: 077 2256044 | ඇත්නාවල, වරකපොල." data-en="Phone: 077 2256044 | Etnawala, Warakapola.">දුරකථන අංකය: 077 2256044 | ඇත්නාවල, වරකපොල.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 3: WORKSHOP ================= -->
+    <div id="tab-workshop" class="tab-content">
+      <div id="cover-workshop" class="bg-[#2D1B14] text-white py-16 md:py-24 text-center px-4 relative overflow-hidden bg-cover bg-center transition-all duration-300" style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1600&q=80');">
+        <div id="cover-workshop-overlay" class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="max-w-3xl mx-auto relative z-10 drop-shadow-md">
+          <span class="text-xs font-bold text-[#D4A373] uppercase tracking-wider block mb-2 drop-shadow" data-si="යාන්ත්‍රික වඩු මඩුව" data-en="Mechanical Wood Workshop">යාන්ත්‍රික වඩු මඩුව</span>
+          <h1 class="hero-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg" data-si="නවීන යන්ත්‍ර සූත්‍ර සහ ප්‍රවීණ වඩු ශිල්පීන්ගේ එකතුව" data-en="Modern Machinery & Expert Carpenters">නවීන යන්ත්‍ර සූත්‍ර සහ ප්‍රවීණ වඩු ශිල්පීන්ගේ එකතුව</h1>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4 py-6">
+        <div id="workshop-admin-bar" class="hidden bg-[#EFE8DF] border border-[#D4C3B3] p-4 rounded-2xl mb-8 flex flex-wrap items-center justify-between gap-4">
+          <span class="font-bold text-sm text-[#3A261C]">⚙️ වඩු මඩුව කළමනාකරු (Admin Manager):</span>
+          <div class="flex gap-2 flex-wrap">
+            <button id="adminBtnWorkshop" onclick="toggleAdminMode()" class="bg-white border border-gray-300 px-3.5 py-2 rounded-xl text-xs font-bold shadow-sm cursor-pointer">✏️ Enable Edit Mode</button>
+            <button onclick="openAddItemModal('workshop')" class="bg-[#25D366] text-white px-4 py-2 rounded-xl text-xs font-bold shadow cursor-pointer">+ අලුත් අයිටම් එකක් ඇඩ් කරන්න</button>
+          </div>
+        </div>
+
+        <div id="workshop-view-main" class="sub-view active">
+          <div class="flex justify-end mb-6">
+            <button onclick="switchWorkshopSub('projects')" class="bg-gradient-to-r from-[#8B5A2B] to-[#5C3D2E] text-white px-5 md:px-6 py-3.5 md:py-4 rounded-2xl font-bold text-xs shadow-xl flex items-center gap-3 border border-[#D4A373]/30 hover:scale-105 transition cursor-pointer">
+              <span class="text-lg">📸</span>
+              <div class="text-left">
+                <span class="text-[10px] text-[#D4A373] uppercase font-black block" data-si="විශේෂ අනු පිටුව" data-en="Special Sub-Page">විශේෂ අනු පිටුව</span>
+                <span data-si="අපගේ සම්පූර්ණ කළ ව්‍යාපෘති ගැලරිය →" data-en="Our Completed Projects Gallery →">අපගේ සම්පූර්ණ කළ ව්‍යාපෘති ගැලරිය →</span>
+              </div>
+            </button>
+          </div>
+
+          <div id="workshop-cat-container" class="flex flex-wrap justify-center items-center gap-2 mb-6 relative z-10"></div>
+          
+          <!-- FULL SECTION BACKGROUND WRAPPER FOR WORKSHOP ITEMS -->
+          <div id="workshop-section-bg-wrapper" class="cat-section-bg rounded-3xl p-4 sm:p-6 md:p-8 mb-8 relative overflow-hidden min-h-[350px]">
+            <div id="workshop-section-bg-overlay" class="absolute inset-0 bg-transparent transition-all pointer-events-none"></div>
+            
+            <div id="workshop-admin-bg-btn-container" class="hidden justify-end mb-4 relative z-20">
+              <button onclick="openCategoryBgModal('workshop')" class="bg-[#3A261C] hover:bg-[#2D1B14] text-[#D4A373] border border-[#7A5843] px-4 py-2 rounded-xl text-xs font-bold shadow-lg cursor-pointer">
+                🖼️ Edit Category Section Background
+              </button>
+            </div>
+
+            <div id="workshop-items-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center relative z-10"></div>
+          </div>
+        </div>
+
+        <div id="workshop-view-projects" class="sub-view">
+          <div class="mb-6 flex justify-between items-center flex-wrap gap-3">
+            <button onclick="switchWorkshopSub('main')" class="bg-white border border-[#E0D5C7] px-4 py-2 rounded-xl text-xs font-bold shadow-sm cursor-pointer" data-si="← වඩු මඩුව වෙත ආපසු" data-en="← Back to Wood Workshop">← Back to Wood Workshop</button>
+            <button id="addProjBtn" onclick="openAddProjectModal()" class="hidden bg-[#8B5A2B] text-white px-4 py-2 rounded-xl text-xs font-bold shadow cursor-pointer" data-si="+ අලුත් ව්‍යාපෘතියක් ඇඩ් කරන්න" data-en="+ Add New Project">+ අලුත් ව්‍යාපෘතියක් ඇඩ් කරන්න</button>
+          </div>
+
+          <div class="bg-[#2D1B14] text-white rounded-3xl p-6 md:p-12 border border-[#5C3D2E] shadow-2xl">
+            <h2 class="hero-title text-xl md:text-3xl font-bold mb-2" data-si="අපගේ සම්පූර්ණ කළ ව්‍යාපෘති ගැලරිය සහ වීඩියෝ" data-en="Our Completed Projects & Video Gallery">අපගේ සම්පූර්ණ කළ ව්‍යාපෘති ගැලරිය සහ වීඩියෝ</h2>
+            <p class="text-xs text-[#D4C3B3] mb-8" data-si="ව්‍යාපෘති අංක 01, 02, 03... ලෙස අප විසින් නිමකළ සවිස්තරාත්මක ව්‍යාපෘති, ඡායාරූප සහ වීඩියෝ ක්ලිප්." data-en="Detailed projects, photos and video clips of successfully completed work.">ව්‍යාපෘති අංක 01, 02, 03... ලෙස අප විසින් නිමකළ සවිස්තරාත්මක ව්‍යාපෘති, ඡායාරූප සහ වීඩියෝ ක්ලිප්.</p>
+
+            <div id="workshop-projects-grid" class="grid md:grid-cols-2 gap-6 md:gap-8"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 4: SHOWROOM ================= -->
+    <div id="tab-shop" class="tab-content">
+      <div id="cover-shop" class="bg-[#2D1B14] text-white py-16 md:py-24 text-center px-4 relative overflow-hidden bg-cover bg-center transition-all duration-300" style="background-image: url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1600&q=80');">
+        <div id="cover-shop-overlay" class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="max-w-3xl mx-auto relative z-10 drop-shadow-md">
+          <span class="text-xs font-bold text-[#D4A373] uppercase tracking-wider block mb-2 drop-shadow" data-si="ගෘහ භාණ්ඩ ප්‍රදර්ශනාගාරය" data-en="Furniture Showroom">ගෘහ භාණ්ඩ ප්‍රදර්ශනාගාරය</span>
+          <h1 class="hero-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg" data-si="ඔබේ නිවසට අවශ්‍ය සියලුම නවීන ගෘහ භාණ්ඩ" data-en="All Modern Furniture for Your Home">ඔබේ නිවසට අවශ්‍ය සියලුම නවීන ගෘහ භාණ්ඩ</h1>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4 py-6">
+        <div id="showroom-admin-bar" class="hidden bg-[#EFE8DF] border border-[#D4C3B3] p-4 rounded-2xl mb-8 flex flex-wrap items-center justify-between gap-4">
+          <span class="font-bold text-sm text-[#3A261C]">⚙️ ප්‍රදර්ශනාගාර කළමනාකරු (Admin Manager):</span>
+          <div class="flex gap-2 flex-wrap">
+            <button id="adminBtnShowroom" onclick="toggleAdminMode()" class="bg-white border border-gray-300 px-3.5 py-2 rounded-xl text-xs font-bold shadow-sm cursor-pointer">✏️ Enable Edit Mode</button>
+            <button onclick="openAddItemModal('showroom')" class="bg-[#25D366] text-white px-4 py-2 rounded-xl text-xs font-bold shadow cursor-pointer">+ අලුත් ගෘහ භාණ්ඩයක් ඇඩ් කරන්න</button>
+          </div>
+        </div>
+
+        <div id="showroom-cat-container" class="flex flex-wrap justify-center items-center gap-2 mb-6 relative z-10"></div>
+
+        <!-- FULL SECTION BACKGROUND WRAPPER FOR SHOWROOM ITEMS -->
+        <div id="showroom-section-bg-wrapper" class="cat-section-bg rounded-3xl p-4 sm:p-6 md:p-8 mb-8 relative overflow-hidden min-h-[350px]">
+          <div id="showroom-section-bg-overlay" class="absolute inset-0 bg-transparent transition-all pointer-events-none"></div>
+
+          <div id="showroom-admin-bg-btn-container" class="hidden justify-end mb-4 relative z-20">
+            <button onclick="openCategoryBgModal('showroom')" class="bg-[#3A261C] hover:bg-[#2D1B14] text-[#D4A373] border border-[#7A5843] px-4 py-2 rounded-xl text-xs font-bold shadow-lg cursor-pointer">
+              🖼️ Edit Category Section Background
+            </button>
+          </div>
+
+          <div id="showroom-items-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center relative z-10"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 5: TIMBER DEPOT ================= -->
+    <div id="tab-timber" class="tab-content">
+      <div id="cover-timber" class="bg-[#2D1B14] text-white py-16 md:py-24 text-center px-4 relative overflow-hidden bg-cover bg-center transition-all duration-300" style="background-image: url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80');">
+        <div id="cover-timber-overlay" class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="max-w-3xl mx-auto relative z-10 drop-shadow-md">
+          <span class="text-xs font-bold text-[#D4A373] uppercase tracking-wider block mb-2 drop-shadow" data-si="තොග ලී ගබඩාව" data-en="Wholesale Timber Depot">තොග ලී ගබඩාව</span>
+          <h1 class="hero-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg" data-si="විශ්වාසනීය ශ්‍රී ලාංකේය දැව තොග සහ ලෑලි" data-en="Trusted Sri Lankan Hardwood & Timber Stock">විශ්වාසනීය ශ්‍රී ලාංකේය දැව තොග සහ ලෑලි</h1>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4 py-6">
+        <div id="timber-admin-bar" class="hidden bg-[#EFE8DF] border border-[#D4C3B3] p-4 rounded-2xl mb-8 flex flex-wrap items-center justify-between gap-4">
+          <span class="font-bold text-sm text-[#3A261C]">⚙️ ලී ගබඩා කළමනාකරු (Admin Manager):</span>
+          <div class="flex gap-2 flex-wrap">
+            <button id="adminBtnTimber" onclick="toggleAdminMode()" class="bg-white border border-gray-300 px-3.5 py-2 rounded-xl text-xs font-bold shadow-sm cursor-pointer">✏️ Enable Edit Mode</button>
+            <button onclick="openAddItemModal('timber')" class="bg-[#25D366] text-white px-4 py-2 rounded-xl text-xs font-bold shadow cursor-pointer">+ අලුත් දැව තොගයක් ඇඩ් කරන්න</button>
+            <button onclick="openTimberPriceModal()" class="bg-[#8B5A2B] text-white px-4 py-2 rounded-xl text-xs font-bold shadow cursor-pointer">🪵 දැව මිල ගණන් වෙනස් කරන්න</button>
+          </div>
+        </div>
+
+        <div id="timber-cat-container" class="flex flex-wrap justify-center items-center gap-2 mb-6 relative z-10"></div>
+
+        <!-- FULL SECTION BACKGROUND WRAPPER FOR TIMBER ITEMS -->
+        <div id="timber-section-bg-wrapper" class="cat-section-bg rounded-3xl p-4 sm:p-6 md:p-8 mb-12 relative overflow-hidden min-h-[350px]">
+          <div id="timber-section-bg-overlay" class="absolute inset-0 bg-transparent transition-all pointer-events-none"></div>
+
+          <div id="timber-admin-bg-btn-container" class="hidden justify-end mb-4 relative z-20">
+            <button onclick="openCategoryBgModal('timber')" class="bg-[#3A261C] hover:bg-[#2D1B14] text-[#D4A373] border border-[#7A5843] px-4 py-2 rounded-xl text-xs font-bold shadow-lg cursor-pointer">
+              🖼️ Edit Category Section Background
+            </button>
+          </div>
+
+          <div id="timber-items-grid" class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center relative z-10"></div>
+        </div>
+
+        <!-- Timber Calculator Section -->
+        <div class="bg-white border border-[#E0D5C7] p-6 md:p-8 rounded-3xl max-w-2xl shadow-lg mx-auto relative z-10">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="font-bold text-lg md:text-xl text-[#3A261C]" data-si="ලී ප්‍රමාණය සහ වටිනාකම ගණකය (Advanced Calculator)" data-en="Timber Volume & Value Calculator">ලී ප්‍රමාණය සහ වටිනාකම ගණකය</h3>
+            <button id="adminPriceDirectBtn" onclick="openTimberPriceModal()" class="hidden text-xs bg-[#F4EAD4] text-[#8B5A2B] font-bold px-3 py-1.5 rounded-lg border border-[#D4A373] hover:bg-[#e8dac0]">⚙️ Edit CFT Prices</button>
+          </div>
+          <p class="text-xs text-gray-600 mb-6" data-si="ලී වල දිග, පළල, ඝනකම (අඟල් සහ නූල්) ඇතුළත් කර CFT, වර්ග අඩි සහ වටිනාකම ගණනය කරන්න." data-en="Enter dimensions to calculate CFT, Sq Ft and Total Price.">ලී වල දිග, පළල, ඝනකම (අඟල් සහ නූල්) ඇතුළත් කර CFT, වර්ග අඩි සහ වටිනාකම ගණනය කරන්න.</p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs mb-4">
+            <div class="col-span-2 sm:col-span-1">
+              <label class="block font-bold mb-1 text-[#3A261C]" data-si="දැව වර්ගය (Wood Type)" data-en="Wood Species">දැව වර්ගය (Wood Type)</label>
+              <select id="calcWoodSelect" onchange="calculateCFT()" class="w-full border p-2.5 rounded-xl font-bold bg-[#FAF8F5] focus:border-[#8B5A2B] outline-none"></select>
+            </div>
+            <div>
+              <label class="block font-bold mb-1 text-[#3A261C]" data-si="දිග (අඩි / Feet)" data-en="Length (Feet)">දිග (අඩි / Feet)</label>
+              <input type="number" id="calcLength" value="10" step="any" oninput="calculateCFT()" class="w-full border p-2.5 rounded-xl font-bold bg-[#FAF8F5] outline-none focus:border-[#8B5A2B]" />
+            </div>
+            <div>
+              <label class="block font-bold mb-1 text-[#3A261C]" data-si="පළල (අඟල් / Inches)" data-en="Width (Inches)">පළල (අඟල් / Inches)</label>
+              <input type="number" id="calcWidth" value="4" step="1" min="1" oninput="calculateCFT()" class="w-full border p-2.5 rounded-xl font-bold bg-[#FAF8F5] outline-none focus:border-[#8B5A2B]" />
+            </div>
+
+            <div>
+              <label class="block font-bold mb-1 text-[#3A261C]" data-si="ඝනකම (අඟල් / Inches)" data-en="Thickness (Inches)">ඝනකම (අඟල්)</label>
+              <input type="number" id="calcThickInches" value="1" min="0" step="1" oninput="calculateCFT()" class="w-full border p-2.5 rounded-xl font-bold bg-[#FAF8F5] outline-none focus:border-[#8B5A2B]" />
+            </div>
+            <div>
+              <label class="block font-bold mb-1 text-[#3A261C]" data-si="ඝනකම (නූල් / Nool)" data-en="Thickness (Nool 1-7)">ඝනකම (නූල්)</label>
+              <select id="calcThickNool" onchange="calculateCFT()" class="w-full border p-2.5 rounded-xl font-bold bg-[#FAF8F5] outline-none focus:border-[#8B5A2B]">
+                <option value="0">0 නූල්</option>
+                <option value="1" selected>1 නූල (1/8")</option>
+                <option value="2">2 නූල් (1/4")</option>
+                <option value="3">3 නූල් (3/8")</option>
+                <option value="4">4 නූල් (1/2")</option>
+                <option value="5">5 නූල් (5/8")</option>
+                <option value="6">6 නූල් (3/4")</option>
+                <option value="7">7 නූල් (7/8")</option>
+              </select>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+              <label class="block font-bold mb-1 text-[#3A261C]" data-si="ලෑලි ගණන (Qty)" data-en="Quantity">ලෑලි ගණන (Qty)</label>
+              <input type="number" id="calcQty" value="10" min="1" oninput="calculateCFT()" class="w-full border p-2.5 rounded-xl font-bold bg-[#FAF8F5] outline-none focus:border-[#8B5A2B]" />
+            </div>
+          </div>
+
+          <button onclick="calculateCFT()" class="w-full bg-[#8B5A2B] text-white py-3.5 rounded-xl font-bold text-xs shadow hover:bg-[#724820] cursor-pointer transition mb-4" data-si="ගණනය කරන්න" data-en="Calculate Now">
+            ගණනය කරන්න
+          </button>
+
+          <div id="calcResultBox" class="bg-[#F4EAD4] border border-[#D4A373] p-5 rounded-2xl space-y-3">
+            <div class="grid grid-cols-2 gap-3 text-center text-xs border-b border-[#D4A373]/50 pb-3">
+              <div class="bg-white/80 p-3 rounded-xl border border-[#D4A373]/30">
+                <span class="text-[10px] text-gray-500 font-bold block" data-si="කියුබික් අඩි (CFT)" data-en="Cubic Feet (CFT)">කියුබික් අඩි (CFT)</span>
+                <span id="resCFT" class="text-lg font-black text-[#3A261C]">0.00</span>
+              </div>
+              <div class="bg-white/80 p-3 rounded-xl border border-[#D4A373]/30">
+                <span class="text-[10px] text-gray-500 font-bold block" data-si="වර්ග අඩි (Sq Ft)" data-en="Square Feet">වර්ග අඩි (Sq Ft)</span>
+                <span id="resSqFt" class="text-lg font-black text-[#3A261C]">0.00</span>
+              </div>
+            </div>
+            <div class="flex justify-between items-center pt-1">
+              <span class="text-xs font-bold text-[#3A261C]" data-si="තක්සේරු මුළු වටිනාකම:" data-en="Est. Total Price:">තක්සේරු මුළු වටිනාකම:</span>
+              <span id="resPrice" class="text-xl font-black text-[#8B5A2B]">LKR 0</span>
+            </div>
+            <p id="resUnitPriceNote" class="text-[10px] text-right text-gray-500 italic">* CFT එකක වත්මන් නියමිත මිල අනුව ගණනය කර ඇත.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= TAB 6: CONTACT ================= -->
+    <div id="tab-contact" class="tab-content">
+      <div id="cover-contact" class="bg-[#2D1B14] text-white py-16 md:py-24 text-center px-4 relative overflow-hidden bg-cover bg-center transition-all duration-300" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80');">
+        <div id="cover-contact-overlay" class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="max-w-3xl mx-auto relative z-10 drop-shadow-md">
+          <span class="text-xs font-bold text-[#D4A373] uppercase tracking-wider block mb-2 drop-shadow" data-si="අප හා සම්බන්ධ වන්න" data-en="GET IN TOUCH WITH US">අප හා සම්බන්ධ වන්න</span>
+          <h1 class="hero-title text-2xl sm:text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg" data-si="අපගේ ප්‍රදර්ශනාගාරයට පැමිණෙන්න නැතහොත් ඇස්තමේන්තුවක් ලබාගන්න" data-en="Visit Our Showroom or Request a Free Project Estimate">අපගේ ප්‍රදර්ශනාගාරයට පැමිණෙන්න නැතහොත් ඇස්තමේන්තුවක් ලබාගන්න</h1>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4 py-6 max-w-4xl">
+        <div class="grid md:grid-cols-2 gap-8 items-start">
+          <div class="space-y-6">
+            <div class="bg-white border border-[#E0D5C7] p-6 rounded-3xl shadow-sm hover:shadow-md transition">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-[#F4EAD4] text-[#8B5A2B] rounded-2xl flex items-center justify-center text-xl shrink-0">📍</div>
+                <div>
+                  <h3 class="font-bold text-[#3A261C] text-base mb-1" data-si="ප්‍රධාන ප්‍රදර්ශනාගාරය සහ වඩු මඩුව" data-en="Main Showroom & Mechanical Workshop">ප්‍රධාන ප්‍රදර්ශනාගාරය සහ වඩු මඩුව</h3>
+                  <p class="text-xs text-gray-600 leading-relaxed mb-2" data-si="ඩිලායන් ගෘහ භාණ්ඩ, ඇත්නාවල, වරකපොල, සබරගමුව පළාත, ශ්‍රී ලංකාව." data-en="Dilayan Furniture, Etnawala, Warakapola, Sabaragamuwa Province, Sri Lanka.">ඩිලායන් ගෘහ භාණ්ඩ, ඇත්නාවල, වරකපොල, සබරගමුව පළාත, ශ්‍රී ලංකාව.</p>
+                  <a href="https://maps.app.goo.gl/R5bypit9dcmATFRC7" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#8B5A2B] hover:underline inline-flex items-center gap-1" data-si="🗺️ Google Maps මඟින් මග සොයාගන්න (Get Directions) →" data-en="🗺️ Get Directions via Google Maps →">
+                    🗺️ Google Maps මඟින් මග සොයාගන්න (Get Directions) →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-[#E0D5C7] p-6 rounded-3xl shadow-sm hover:shadow-md transition">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-[#F4EAD4] text-[#8B5A2B] rounded-2xl flex items-center justify-center text-xl shrink-0">📞</div>
+                <div>
+                  <h3 class="font-bold text-[#3A261C] text-base mb-1" data-si="දුරකථන සහ WhatsApp අංක" data-en="Direct Phone & WhatsApp Hotline">දුරකථන සහ WhatsApp අංක</h3>
+                  <p class="text-xs text-gray-600 mb-1" data-si="ඕනෑම වේලාවක ඇමතුම් හෝ WhatsApp පණිවිඩ යොමු කරන්න:" data-en="Call or WhatsApp us for instant queries:">ඕනෑම වේලාවක ඇමතුම් හෝ WhatsApp පණිවිඩ යොමු කරන්න:</p>
+                  <a href="tel:0772256044" class="text-lg font-black text-[#8B5A2B] block hover:underline">📞 077 2256044</a>
+                  <a href="https://wa.me/94772256044" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#25D366] mt-1 inline-block hover:underline" data-si="💬 WhatsApp හරහා කතා කරන්න" data-en="💬 Click to Chat on WhatsApp">💬 WhatsApp හරහා කතා කරන්න</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-[#E0D5C7] p-6 rounded-3xl shadow-sm hover:shadow-md transition">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-[#F4EAD4] text-[#8B5A2B] rounded-2xl flex items-center justify-center text-xl shrink-0">⏰</div>
+                <div>
+                  <h3 class="font-bold text-[#3A261C] text-base mb-1" data-si="සේවා කාලය" data-en="Opening Hours & Field Visits">සේවා කාලය</h3>
+                  <p class="text-xs text-gray-600 leading-relaxed" data-si="සඳුදා - ඉරිදා: පෙ.ව. 8:00 - ප.ව. 6:30" data-en="Monday - Sunday: 8:00 AM - 6:30 PM">සඳුදා - ඉරිදා: පෙ.ව. 8:00 - ප.ව. 6:30</p>
+                  <p class="text-[11px] text-[#8B5A2B] font-bold mt-1" data-si="* දිවයින පුරා නිවාස සඳහා පැමිණ මැනීම් සිදුකිරීමේ පහසුකම පවතී." data-en="* On-site measurements and island-wide delivery available.">* දිවයින පුරා නිවාස සඳහා පැමිණ මැනීම් සිදුකිරීමේ පහසුකම පවතී.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-[#E0D5C7] p-6 md:p-8 rounded-3xl shadow-md">
+            <h3 class="text-xl font-bold text-[#3A261C] mb-2" data-si="ඉක්මන් ඇස්තමේන්තුවක් / විමසීමක් යොමු කරන්න" data-en="Request Fast Quote / Instant Inquiry">ඉක්මන් ඇස්තමේන්තුවක් / විමසීමක් යොමු කරන්න</h3>
+            <p class="text-xs text-gray-500 mb-6" data-si="පහත විස්තර පුරවා WhatsApp මඟින් කෙලින්ම අපගේ කාර්මික ශිල්පීන් හා සම්බන්ධ වන්න." data-en="Fill the form to connect directly with our woodworking experts via WhatsApp.">පහත විස්තර පුරවා WhatsApp මඟින් කෙලින්ම අපගේ කාර්මික ශිල්පීන් හා සම්බන්ධ වන්න.</p>
+
+            <form onsubmit="handleContactFormSubmit(event)" class="space-y-4 text-xs font-medium">
+              <div>
+                <label class="block font-bold mb-1 text-[#3A261C]" data-si="ඔබගේ නම (Your Name)" data-en="Your Full Name">ඔබගේ නම (Your Name)</label>
+                <input type="text" id="contactFormName" required placeholder="e.g. නිමල් පෙරේරා" class="w-full border p-3 rounded-xl bg-[#FAF8F5] outline-none focus:border-[#8B5A2B]" />
+              </div>
+
+              <div>
+                <label class="block font-bold mb-1 text-[#3A261C]" data-si="දුරකථන අංකය (Mobile Number)" data-en="Phone Number">දුරකථන අංකය (Mobile Number)</label>
+                <input type="tel" id="contactFormPhone" required placeholder="077XXXXXXX" class="w-full border p-3 rounded-xl bg-[#FAF8F5] outline-none focus:border-[#8B5A2B]" />
+              </div>
+
+              <div>
+                <label class="block font-bold mb-1 text-[#3A261C]" data-si="අවශ්‍ය සේවාව (Required Service)" data-en="Service Needed">අවශ්‍ය සේවාව (Required Service)</label>
+                <select id="contactFormService" class="w-full border p-3 rounded-xl bg-[#FAF8F5] font-bold outline-none focus:border-[#8B5A2B]">
+                  <option value="Woodwork / Doors / Roofing (උළුවහු/දොර/වහල)" data-si="උළුවහු, දොර, ජනෙල් සහ වහල ලී වැඩ" data-en="Doors, Windows & Roofing Woodwork">උළුවහු, දොර, ජනෙල් සහ වහල ලී වැඩ</option>
+                  <option value="Furniture Showroom Items (ගෘහ භාණ්ඩ)" data-si="ගෘහ භාණ්ඩ මිලදී ගැනීම් (Showroom Furniture)" data-en="Furniture Showroom Items">ගෘහ භාණ්ඩ මිලදී ගැනීම් (Showroom Furniture)</option>
+                  <option value="Timber Depot Wholesale Planks (ලී/ලෑලි තොග)" data-si="තොග ලී / ලෑලි මිලදී ගැනීම් (Timber Orders)" data-en="Wholesale Timber Orders">තොග ලී / ලෑලි මිලදී ගැනීම් (Timber Orders)</option>
+                  <option value="Staircase & Wooden Flooring (ලී පඩිපෙළ/ෆ්ලෝරින්)" data-si="ලී පඩිපෙළවල් සහ Wooden Flooring" data-en="Staircases & Wooden Flooring">ලී පඩිපෙළවල් සහ Wooden Flooring</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-bold mb-1 text-[#3A261C]" data-si="විස්තරය / ප්‍රමාණ (Message / Dimensions)" data-en="Message / Details">විස්තරය / ප්‍රමාණ (Message / Dimensions)</label>
+                <textarea id="contactFormMsg" rows="3" placeholder="ඔබට අවශ්‍ය ලී වර්ගය, ප්‍රමාණ හෝ වෙනත් විස්තර සඳහන් කරන්න..." class="w-full border p-3 rounded-xl bg-[#FAF8F5] outline-none focus:border-[#8B5A2B]"></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1EBE5A] text-white py-3.5 rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer" data-si="💬 WhatsApp හරහා පණිවිඩය යොමු කරන්න" data-en="💬 Send Request via WhatsApp">
+                💬 WhatsApp හරහා පණිවිඩය යොමු කරන්න
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= WEBSITE FOOTER ================= -->
+  <footer class="bg-[#1E110C] text-[#D4C3B3] pt-12 pb-8 border-t border-[#3A261C] mt-auto relative z-30">
+    <div class="container mx-auto px-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <img id="footerLogoImg" src="https://i.ibb.co/3s8sR45/FB-IMG-1744563822704.jpg" alt="Logo" class="w-10 h-10 rounded-lg object-contain bg-white p-0.5" />
+          <span class="text-lg font-bold text-white" data-si="ඩිලායන් ෆර්නිචර්" data-en="Dilayan Furniture">ඩිලායන් ෆර්නිචර්</span>
+        </div>
+        <p class="text-xs leading-relaxed text-[#A89688]" data-si="ඩිලායන් ගෘහ භාණ්ඩ - වරකපොල ප්‍රදේශයේ ප්‍රමුඛතම යාන්ත්‍රික වඩු මඩුව, ගෘහ භාණ්ඩ ප්‍රදර්ශනාගාරය සහ තොග ලී ගබඩාව. දිවයින පුරා විශ්වාසනීය සේවාව." data-en="Dilayan Furniture - Warakapola's premier mechanical wood workshop, furniture showroom, and timber depot. Islandwide trusted service.">
+          ඩිලායන් ගෘහ භාණ්ඩ - වරකපොල ප්‍රදේශයේ ප්‍රමුඛතම යාන්ත්‍රික වඩු මඩුව, ගෘහ භාණ්ඩ ප්‍රදර්ශනාගාරය සහ තොග ලී ගබඩාව. දිවයින පුරා විශ්වාසනීය සේවාව.
+        </p>
+        <div class="pt-2">
+          <a href="https://www.facebook.com/profile.php?id=100076049183136" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 bg-[#1877F2] text-white px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-[#166fe5] transition-colors" data-si="📘 නිල ෆේස්බුක් පිටුව" data-en="📘 Official Facebook Page">
+            📘 Official Facebook Page
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3" data-si="ඉක්මන් සබැඳි" data-en="Quick Links">ඉක්මන් සබැඳි</h4>
+        <ul class="space-y-2 text-xs">
+          <li><button onclick="switchTab('home')" class="hover:text-white transition cursor-pointer" data-si="මුල් පිටුව" data-en="Home">මුල් පිටුව</button></li>
+          <li><button onclick="switchTab('about')" class="hover:text-white transition cursor-pointer" data-si="අප ගැන" data-en="About Us">අප ගැන</button></li>
+          <li><button onclick="switchTab('workshop')" class="hover:text-white transition cursor-pointer" data-si="වඩු මඩුව" data-en="Wood Workshop">වඩු මඩුව</button></li>
+          <li><button onclick="switchTab('shop')" class="hover:text-white transition cursor-pointer" data-si="ප්‍රදර්ශනාගාරය" data-en="Showroom">ප්‍රදර්ශනාගාරය</button></li>
+          <li><button onclick="switchTab('timber')" class="hover:text-white transition cursor-pointer" data-si="ලී ගබඩාව" data-en="Timber Depot">ලී ගබඩාව</button></li>
+          <li><button onclick="switchTab('contact')" class="hover:text-white transition cursor-pointer" data-si="සම්බන්ධ වන්න" data-en="Contact Us">සම්බන්ධ වන්න</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3" data-si="අපගේ සේවාවන්" data-en="Our Services">අපගේ සේවාවන්</h4>
+        <ul class="space-y-2 text-xs text-[#A89688]">
+          <li data-si="උළුවහු සහ දොරවල් (Doors & Frames)" data-en="Doors & Door Frames">උළුවහු සහ දොරවල් (Doors & Frames)</li>
+          <li data-si="වහලවල් සහ ලී සිවිලිම් (Roofing)" data-en="Structural Roofing & Ceilings">වහලවල් සහ ලී සිවිලිම් (Roofing)</li>
+          <li data-si="ලී පඩිපෙළ සහ අත්වැට (Staircases)" data-en="Staircases & Carved Handrails">ලී පඩිපෙළ සහ අත්වැට (Staircases)</li>
+          <li data-si="සෝෆා, ඇඳන් සහ ගෘහ භාණ්ඩ" data-en="Teak Sofas, Beds & Furniture">සෝෆා, ඇඳන් සහ ගෘහ භාණ්ඩ</li>
+          <li data-si="කොස්, තේක්ක, නදුන් තොග ලී" data-en="Wholesale Hardwood & Timber">කොස්, තේක්ක, නදුන් තොග ලී</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-3" data-si="සම්බන්ධ කරගන්න" data-en="Contact Details">සම්බන්ධ කරගන්න</h4>
+        <div class="space-y-2 text-xs text-[#A89688]">
+          <p>📍 <span data-si="ඇත්නාවල, වරකපොල, ශ්‍රී ලංකාව." data-en="Etnawala, Warakapola, Sri Lanka.">ඇත්නාවල, වරකපොල, ශ්‍රී ලංකාව.</span></p>
+          <p>📞 <a href="tel:0772256044" class="text-[#D4A373] font-bold hover:underline">077 2256044</a></p>
+          <p>💬 <a href="https://wa.me/94772256044" target="_blank" rel="noopener noreferrer" class="text-[#25D366] font-bold hover:underline" data-si="WhatsApp උණුසුම් ඇමතුම් අංකය" data-en="WhatsApp Hotline">WhatsApp Hotline</a></p>
+          <p>⏰ <span data-si="පෙ.ව. 8:00 - ප.ව. 6:30" data-en="8:00 AM - 6:30 PM (Daily)">පෙ.ව. 8:00 - ප.ව. 6:30</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 pt-6 border-t border-[#2D1B14] text-center text-xs text-[#7A6C62]">
+      <p>© 2026 Dilayan Furniture Warakapola. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- MODAL 1: LOGO CUSTOMIZATION -->
+  <div id="logoModal" class="modal fixed inset-0 bg-black/75 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl p-6 relative shadow-2xl">
+      <button onclick="closeModal('logoModal')" class="absolute top-4 right-4 text-gray-400 font-bold cursor-pointer">✕</button>
+      <h3 class="text-lg font-bold text-[#3A261C] mb-2" data-si="ලෝගෝ එක වෙනස් කිරීම (Header & Footer Logo)" data-en="Change Header & Footer Logo">ලෝගෝ එක වෙනස් කිරීම</h3>
+      <p class="text-xs text-gray-500 mb-4" data-si="උඩ සහ පහළ ප්‍රදර්ශනය වන Logo එක වෙනස් කිරීමට නව පින්තූරයක් තෝරන්න." data-en="Select a new image file or URL to update top & bottom logos.">උඩ සහ පහළ ප්‍රදර්ශනය වන Logo එක වෙනස් කිරීමට නව පින්තූරයක් තෝරන්න.</p>
+      
+      <form onsubmit="handleSaveLogo(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold mb-1" data-si="ලෝගෝ පින්තූරය Upload කරන්න" data-en="Upload Logo Image">ලෝගෝ පින්තූරය Upload කරන්න</label>
+          <input type="file" id="logoFileInput" accept="image/*" onchange="previewLogoFile(event)" class="w-full border p-2 rounded-xl bg-[#FAF8F5]" />
+        </div>
+        <div class="text-center font-bold text-gray-400 text-[10px] uppercase tracking-widest">- OR ENTER IMAGE URL -</div>
+        <div>
+          <label class="block font-bold mb-1" data-si="ලෝගෝ URL එක" data-en="Logo Image URL">ලෝගෝ URL එක</label>
+          <input type="url" id="logoUrlInput" placeholder="https://..." oninput="previewLogoUrl(this.value)" class="w-full border p-2.5 rounded-xl bg-[#FAF8F5] outline-none" />
+        </div>
+
+        <div id="logoPreviewContainer" class="flex justify-center items-center p-4 border rounded-2xl bg-[#FAF8F5]">
+          <img id="logoPreviewImg" src="https://i.ibb.co/3s8sR45/FB-IMG-1744563822704.jpg" class="w-16 h-16 object-contain rounded-xl border bg-white p-1" />
+        </div>
+
+        <button type="submit" class="w-full bg-[#8B5A2B] text-white py-3 rounded-xl font-bold cursor-pointer shadow hover:bg-[#724820]" data-si="ලෝගෝ එක සුරකින්න" data-en="Save Logo">ලෝගෝ එක සුරකින්න</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: COVER PHOTO MODAL -->
+  <div id="coverPhotoModal" class="modal fixed inset-0 bg-black/75 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-3xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('coverPhotoModal')" class="absolute top-4 right-4 text-gray-400 font-bold cursor-pointer">✕</button>
+      <h3 class="text-lg font-bold text-[#3A261C] mb-1" data-si="පිටු වල Cover Photos Zoom / Brightness වෙනස් කිරීම" data-en="Change & Adjust Page Cover Photos">පිටු වල Cover Photos Zoom / Brightness වෙනස් කිරීම</h3>
+      <p class="text-xs text-gray-500 mb-4" data-si="පිටුව තෝරා පින්තූරයේ ප්‍රමාණය (Zoom), පිහිටීම (Position) සහ දීප්තිය (Brightness) සකස් කරන්න." data-en="Select page, upload image and adjust zoom, position & brightness.">පිටුව තෝරා පින්තූරයේ ප්‍රමාණය (Zoom), පිහිටීම (Position) සහ දීප්තිය (Brightness) සකස් කරන්න.</p>
+      
+      <form onsubmit="handleSaveCoverPhoto(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold mb-1" data-si="පිටුව (Page)" data-en="Target Page">පිටුව (Page)</label>
+          <select id="coverPageSelect" onchange="loadPageCoverConfigIntoModal()" class="w-full border p-2.5 rounded-xl font-bold bg-[#FAF8F5]">
+            <option value="home">මුල් පිටුව (Home)</option>
+            <option value="about">අප ගැන (About Us)</option>
+            <option value="workshop">වඩු මඩුව (Wood Workshop)</option>
+            <option value="shop">ප්‍රදර්ශනාගාරය (Showroom)</option>
+            <option value="timber">ලී ගබඩාව (Timber Depot)</option>
+            <option value="contact">සම්බන්ධ වන්න (Contact Us)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold mb-1" data-si="නව පින්තූරයක් Upload කරන්න" data-en="Upload New Image">නව පින්තූරයක් Upload කරන්න</label>
+          <input type="file" id="coverImageFile" accept="image/*" onchange="previewCoverFile(event)" class="w-full border p-2 rounded-xl bg-[#FAF8F5]" />
+        </div>
+
+        <div class="space-y-2">
+          <label class="block font-bold text-[#3A261C]" data-si="පූර්ව දර්ශනය (Live Framing Preview):" data-en="Live Framing Preview:">පූර්ව දර්ශනය (Live Framing Preview):</label>
+          <div id="coverPreviewBox" class="h-44 w-full rounded-2xl border-2 border-[#D4A373] bg-cover bg-no-repeat relative overflow-hidden shadow-inner transition-all duration-150" style="background-image: url('https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1600&q=80');">
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none">
+              <span class="text-white text-xs font-bold drop-shadow">🔎 Adjust Preview Frame</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-[#FAF8F5] p-4 rounded-2xl border space-y-3">
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span data-si="🔍 Zoom (ප්‍රමාණය)" data-en="🔍 Zoom Level">🔍 Zoom (ප්‍රමාණය)</span>
+              <span id="zoomValText">100%</span>
+            </div>
+            <input type="range" id="coverZoomInput" min="100" max="250" value="100" oninput="updateCoverPreviewStyles()" class="w-full accent-[#8B5A2B]" />
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span data-si="☀️ Brightness (දීප්තිය)" data-en="☀️ Brightness Level">☀️ Brightness (දීප්තිය)</span>
+              <span id="brightValText">100%</span>
+            </div>
+            <input type="range" id="coverBrightInput" min="30" max="150" value="100" oninput="updateCoverPreviewStyles()" class="w-full accent-[#8B5A2B]" />
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span data-si="↔️ වම / දකුණ පිහිටීම (X Position)" data-en="↔️ Horizontal Position (X)">↔️ වම / දකුණ පිහිටීම (X)</span>
+              <span id="posXValText">50%</span>
+            </div>
+            <input type="range" id="coverPosXInput" min="0" max="100" value="50" oninput="updateCoverPreviewStyles()" class="w-full accent-[#8B5A2B]" />
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span data-si="↕️ උඩ / යට පිහිටීම (Y Position)" data-en="↕️ Vertical Position (Y)">↕️ උඩ / යට පිහිටීම (Y)</span>
+              <span id="posYValText">50%</span>
+            </div>
+            <input type="range" id="coverPosYInput" min="0" max="100" value="50" oninput="updateCoverPreviewStyles()" class="w-full accent-[#8B5A2B]" />
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-[#8B5A2B] text-white py-3 rounded-xl font-bold cursor-pointer shadow hover:bg-[#724820]" data-si="Cover Photo යාවත්කාලීන කරන්න" data-en="Save Cover Photo">Cover Photo යාවත්කාලීන කරන්න</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: TIMBER CFT PRICES MANAGER -->
+  <div id="timberPriceModal" class="modal fixed inset-0 bg-black/75 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-md rounded-3xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('timberPriceModal')" class="absolute top-4 right-4 text-gray-400 font-bold cursor-pointer">✕</button>
+      <h3 class="text-lg font-bold text-[#3A261C] mb-2" data-si="දැව මිල ගණන් පාලනය (CFT Pricing Manager)" data-en="Timber Price Manager">දැව මිල ගණන් පාලනය</h3>
+      <p class="text-xs text-gray-500 mb-4" data-si="එක් එක් දැව වර්ගය සඳහා 1 CFT එකක වත්මන් නියමිත මිල LKR වලින් වෙනස් කරන්න." data-en="Update unit price per CFT for each timber species in LKR.">එක් එක් දැව වර්ගය සඳහා 1 CFT එකක වත්මන් නියමිත මිල LKR වලින් වෙනස් කරන්න.</p>
+      
+      <div id="timberPriceList" class="space-y-3 text-xs mb-4"></div>
+
+      <button onclick="saveTimberCFTPrices()" class="w-full bg-[#8B5A2B] text-white py-3 rounded-xl font-bold cursor-pointer shadow hover:bg-[#724820]" data-si="මිල ගණන් සුරකින්න" data-en="Save All Prices">මිල ගණන් සුරකින්න</button>
+    </div>
+  </div>
+
+  <!-- MODAL 4: ADVANCED CATEGORY SECTION BACKGROUND CUSTOMIZER -->
+  <div id="categoryBgModal" class="modal fixed inset-0 bg-black/75 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-3xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('categoryBgModal')" class="absolute top-4 right-4 text-gray-400 font-bold cursor-pointer">✕</button>
+      <h3 class="text-lg font-bold text-[#3A261C] mb-1" data-si="කැටගරි අයිටම්ස් පසුබිම් පින්තූරය පාලනය (Category Background)" data-en="Category Section Background Manager">කැටගරි අයිටම්ස් පසුබිම් පින්තූරය පාලනය</h3>
+      <p class="text-xs text-gray-500 mb-4" data-si="තෝරාගත් කැටගරියට අදාළව අයිටම්ස් පිටුපස ඇති සමස්ත කොටසේ පසුබිම් පින්තූරය, Brightness, Zoom සහ Position (Drag) සකස් කරන්න." data-en="Upload/Remove background image, adjust zoom, brightness & position.">තෝරාගත් කැටගරියට අදාළව අයිටම්ස් පිටුපස ඇති සමස්ත කොටසේ පසුබිම් පින්තූරය, Brightness, Zoom සහ Position (Drag) සකස් කරන්න.</p>
+      
+      <form onsubmit="handleSaveCategoryBg(event)" class="space-y-4 text-xs">
+        <div class="flex gap-2">
+          <div class="flex-1">
+            <label class="block font-bold mb-1" data-si="පසුබිම් පින්තූරයක් Upload කරන්න" data-en="Upload Background Image">පසුබිම් පින්තූරයක් Upload කරන්න</label>
+            <input type="file" id="catBgImageFile" accept="image/*" onchange="previewCatBgFile(event)" class="w-full border p-2 rounded-xl bg-[#FAF8F5]" />
+          </div>
+          <button type="button" onclick="clearCatBgSelection()" class="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-2 rounded-xl font-bold self-end border border-red-300 transition cursor-pointer" data-si="🗑️ අයින් කරන්න" data-en="🗑️ Remove Bg">🗑️ අයින් කරන්න</button>
+        </div>
+
+        <div class="space-y-2">
+          <label class="block font-bold text-[#3A261C]" data-si="පූර්ව දර්ශනය සහ Drag/Framing (Live Preview):" data-en="Live Interactive Framing Preview:">පූර්ව දර්ශනය සහ Drag/Framing (Live Preview):</label>
+          <div id="catBgPreviewBox" class="h-44 w-full rounded-2xl border-2 border-[#D4A373] bg-cover bg-no-repeat relative overflow-hidden shadow-inner flex items-center justify-center text-white font-bold cursor-move select-none" style="background-image: url('');">
+            <div class="bg-black/50 px-4 py-2 rounded-xl backdrop-blur-sm border border-white/20 text-center pointer-events-none">
+              <span class="block text-xs drop-shadow">🔎 Interactive Drag Preview</span>
+              <span class="text-[10px] text-gray-300">පින්තූරය Drag කර පාලනය කරන්න</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-[#FAF8F5] p-4 rounded-2xl border space-y-3">
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span data-si="🔍 Zoom (ප්‍රමාණය)" data-en="🔍 Zoom Level">🔍 Zoom (ප්‍රමාණය)</span>
+              <span id="catZoomValText">100%</span>
+            </div>
+            <input type="range" id="catZoomInput" min="100" max="250" value="100" oninput="updateCatBgPreviewStyles()" class="w-full accent-[#8B5A2B]" />
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span data-si="☀️ Brightness (දීප්තිය)" data-en="☀️ Brightness Level">☀️ Brightness (දීප්තිය)</span>
+              <span id="catBrightValText">100%</span>
+            </div>
+            <input type="range" id="catBrightInput" min="20" max="150" value="100" oninput="updateCatBgPreviewStyles()" class="w-full accent-[#8B5A2B]" />
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span data-si="↔️ වම / දකුණ පිහිටීම (X Position)" data-en="↔️ Horizontal Position (X)">↔️ වම / දකුණ පිහිටීම (X)</span>
+              <span id="catPosXValText">50%</span>
+            </div>
+            <input type="range" id="catPosXInput" min="0" max="100" value="50" oninput="updateCatBgPreviewStyles()" class="w-full accent-[#8B5A2B]" />
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span data-si="↕️ උඩ / යට පිහිටීම (Y Position)" data-en="↕️ Vertical Position (Y)">↕️ උඩ / යට පිහිටීම (Y)</span>
+              <span id="catPosYValText">50%</span>
+            </div>
+            <input type="range" id="catPosYInput" min="0" max="100" value="50" oninput="updateCatBgPreviewStyles()" class="w-full accent-[#8B5A2B]" />
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-[#8B5A2B] text-white py-3 rounded-xl font-bold cursor-pointer shadow hover:bg-[#724820]" data-si="කැටගරි පසුබිම සුරකින්න" data-en="Save Category Background">කැටගරි පසුබිම සුරකින්න</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- OTHER SYSTEM MODALS -->
+  <div id="addCategoryModal" class="modal fixed inset-0 bg-black/75 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-6 relative shadow-2xl">
+      <button onclick="closeModal('addCategoryModal')" class="absolute top-4 right-4 text-gray-400 hover:text-black font-bold cursor-pointer">✕</button>
+      <h3 class="text-lg font-bold text-[#3A261C] mb-2" data-si="අලුත් කැටගරියක් එකතු කරන්න" data-en="Add New Category">අලුත් කැටගරියක් එකතු කරන්න</h3>
+      <form onsubmit="handleSaveNewCategoryForm(event)" class="space-y-3 text-xs">
+        <input type="hidden" id="addCategoryTargetSection" />
+        <div>
+          <label class="block font-bold mb-1" data-si="කැටගරි නම (සිංහලෙන්)" data-en="Category Name (Sinhala)">කැටගරි නම (සිංහලෙන්)</label>
+          <input type="text" id="catNameSI" required class="w-full border p-2.5 rounded-xl font-medium" />
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="කැටගරි නම (ඉංග්‍රීසියෙන්)" data-en="Category Name (English)">කැටගරි නම (ඉංග්‍රීසියෙන්)</label>
+          <input type="text" id="catNameEN" required class="w-full border p-2.5 rounded-xl font-medium" />
+        </div>
+        <button type="submit" class="w-full bg-[#8B5A2B] text-white py-3 rounded-xl font-bold cursor-pointer" data-si="කැටගරිය සුරකින්න" data-en="Save Category">සුරකින්න</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="detailModal" class="modal fixed inset-0 bg-black/80 z-50 justify-center items-center p-4 backdrop-blur-sm">
+    <div class="bg-white w-full max-w-lg rounded-3xl p-6 relative shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 w-9 h-9 rounded-full font-bold flex items-center justify-center z-10 text-base shadow cursor-pointer">✕</button>
+      <div id="detailMediaContainer" class="h-56 sm:h-64 w-full rounded-2xl mb-3 border border-[#E0D5C7] overflow-hidden bg-[#FAF8F5] relative">
+        <img id="detailImg" src="" alt="Product Image" class="w-full h-full object-cover transition-all" />
+        <video id="detailVideo" controls class="w-full h-full object-cover hidden" playsinline preload="metadata"></video>
+      </div>
+      <div id="detailThumbnails" class="flex gap-2 overflow-x-auto pb-2 mb-4"></div>
+      <div class="space-y-3">
+        <div class="flex justify-between items-start gap-4">
+          <h3 id="detailTitle" class="text-xl font-bold text-[#3A261C] leading-snug"></h3>
+          <span id="detailPrice" class="bg-[#5C3D2E] text-white text-xs font-bold px-3 py-1.5 rounded-full shrink-0 shadow-sm"></span>
+        </div>
+        <p id="detailDesc" class="text-xs text-gray-600 leading-relaxed bg-[#FAF8F5] p-3 rounded-xl border border-[#E0D5C7]"></p>
+      </div>
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-100">
+        <a id="detailWaBtn" href="#" target="_blank" rel="noopener noreferrer" class="flex-1 bg-[#25D366] text-white py-3 rounded-xl font-bold text-xs text-center shadow flex items-center justify-center gap-2 cursor-pointer" data-si="💬 WhatsApp හරහා විමසන්න" data-en="💬 Inquiry via WhatsApp">💬 WhatsApp හරහා විමසන්න</a>
+        <a href="tel:0772256044" class="bg-[#5C3D2E] text-white px-5 py-3 rounded-xl font-bold text-xs text-center flex items-center justify-center">📞 077 2256044</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="addItemModal" class="modal fixed inset-0 bg-black/75 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-3xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('addItemModal')" class="absolute top-4 right-4 text-gray-400 font-bold cursor-pointer">✕</button>
+      <h3 id="addItemModalTitle" class="text-lg font-bold text-[#3A261C] mb-4">අලුත් අයිටම් එකක් ඇඩ් කරන්න</h3>
+      <form onsubmit="handleSaveItemForm(event)" class="space-y-3 text-xs">
+        <input type="hidden" id="editItemTargetSection" />
+        <input type="hidden" id="editItemId" />
+        <div>
+          <label class="block font-bold mb-1" data-si="අයිටම් නම (සිංහල)" data-en="Item Name (Sinhala)">අයිටම් නම (සිංහල)</label>
+          <input type="text" id="itemFormTitle" required class="w-full border p-2.5 rounded-xl font-medium" />
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="අයිටම් නම (ඉංග්‍රීසි)" data-en="Item Name (English)">අයිටම් නම (ඉංග්‍රීසි)</label>
+          <input type="text" id="itemFormTitleEN" required class="w-full border p-2.5 rounded-xl font-medium" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold mb-1" data-si="මිල ගණන්" data-en="Price / Est.">මිල ගණන්</label>
+            <input type="text" id="itemFormPrice" placeholder="LKR 25,000" class="w-full border p-2.5 rounded-xl font-medium" />
+          </div>
+          <div>
+            <label class="block font-bold mb-1" data-si="කැටගරිය" data-en="Category">කැටගරිය</label>
+            <select id="itemFormCategory" class="w-full border p-2.5 rounded-xl font-bold bg-[#FAF8F5]"></select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="පින්තූර Upload කරන්න (පිළිවෙළට සකස් කරගත හැක)" data-en="Upload Photos">පින්තූර Upload කරන්න</label>
+          <input type="file" id="itemFormFiles" accept="image/*" multiple onchange="handleItemFileSelection(event)" class="w-full border p-2 rounded-xl bg-[#FAF8F5]" />
+          <p class="text-[10px] text-gray-500 mt-1">💡 පින්තූර එකතු වූ පසු ◀ සහ ▶ බටන් මඟින් ඒවා පිළිවෙළ (Sequence) මාරු කරගත හැක.</p>
+          <div id="itemPhotoPreviewContainer" class="flex flex-wrap gap-2 mt-2"></div>
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="විස්තරය (සිංහල)" data-en="Description (Sinhala)">විස්තරය (සිංහල)</label>
+          <textarea id="itemFormDesc" rows="2" class="w-full border p-2.5 rounded-xl font-medium"></textarea>
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="විස්තරය (ඉංග්‍රීසි)" data-en="Description (English)">විස්තරය (ඉංග්‍රීසි)</label>
+          <textarea id="itemFormDescEN" rows="2" class="w-full border p-2.5 rounded-xl font-medium"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-[#8B5A2B] text-white py-3 rounded-xl font-bold cursor-pointer" data-si="සුරකින්න" data-en="Save Item">සුරකින්න</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="changePassModal" class="modal fixed inset-0 bg-black/75 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-6 relative shadow-2xl text-center">
+      <button onclick="closeModal('changePassModal')" class="absolute top-4 right-4 text-gray-400 font-bold cursor-pointer">✕</button>
+      <h3 class="text-lg font-bold text-[#3A261C] mb-4" data-si="මුරපදය වෙනස් කිරීම" data-en="Change Password">මුරපදය වෙනස් කිරීම</h3>
+      <form onsubmit="handleChangePassword(event)" class="space-y-3 text-xs">
+        <input type="password" id="oldPassInput" placeholder="පැරණි මුරපදය" required class="w-full border p-3 rounded-xl font-bold text-center bg-[#FAF8F5]" />
+        <input type="password" id="newPassInput" placeholder="නව මුරපදය" required class="w-full border p-3 rounded-xl font-bold text-center bg-[#FAF8F5]" />
+        <button type="submit" class="w-full bg-[#8B5A2B] text-white py-3 rounded-xl font-bold cursor-pointer" data-si="යාවත්කාලීන කරන්න" data-en="Update Password">Update Password</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminLoginModal" class="modal fixed inset-0 bg-black/75 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-6 relative shadow-2xl text-center border border-[#E0D5C7]">
+      <button onclick="closeModal('adminLoginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-black font-bold cursor-pointer">✕</button>
+      <div class="w-12 h-12 bg-[#F4EAD4] text-[#8B5A2B] rounded-2xl flex items-center justify-center text-xl mx-auto mb-3">🔐</div>
+      <h3 class="text-lg font-bold text-[#3A261C] mb-1" data-si="ඇඩ්මින් පිවිසුම" data-en="Admin Login">ඇඩ්මින් පිවිසුම</h3>
+      <p class="text-xs text-gray-500 mb-4" data-si="කළමනාකරණ කටයුතු සඳහා මුරපදය ඇතුළත් කරන්න" data-en="Enter password for managerial control panel">කළමනාකරණ කටයුතු සඳහා මුරපදය ඇතුළත් කරන්න</p>
+      <form onsubmit="handleAdminLogin(event)" class="space-y-3">
+        <input type="password" id="adminPassInput" required class="w-full border p-3 rounded-xl font-bold text-center bg-[#FAF8F5] focus:border-[#8B5A2B] outline-none" />
+        <button type="submit" class="w-full bg-[#8B5A2B] hover:bg-[#724820] text-white py-3 rounded-xl font-bold cursor-pointer transition" data-si="ඇතුළු වන්න" data-en="Log In">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="projectModal" class="modal fixed inset-0 bg-black/60 z-50 justify-center items-center p-4">
+    <div class="bg-white w-full max-w-md rounded-2xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('projectModal')" class="absolute top-4 right-4 font-bold text-gray-500 cursor-pointer">✕</button>
+      <h3 id="projectModalTitle" class="text-lg font-bold mb-4 text-[#3A261C]">අලුත් ව්‍යාපෘතියක් එකතු කරන්න</h3>
+      <form onsubmit="saveProject(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold mb-1" data-si="ව්‍යාපෘති නම (සිංහල)" data-en="Project Title (Sinhala)">ව්‍යාපෘති නම (සිංහල)</label>
+          <input type="text" id="projTitle" required class="w-full border p-2.5 rounded-xl font-medium" />
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="ව්‍යාපෘති නම (ඉංග්‍රීසි)" data-en="Project Title (English)">ව්‍යාපෘති නම (ඉංග්‍රීසි)</label>
+          <input type="text" id="projTitleEN" required class="w-full border p-2.5 rounded-xl font-medium" />
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="ස්ථානය (Location)" data-en="Location">ස්ථානය</label>
+          <input type="text" id="projLocation" placeholder="Warakapola" class="w-full border p-2.5 rounded-xl font-medium" />
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="පින්තූර Upload කරන්න" data-en="Upload Photos">පින්තූර Upload කරන්න</label>
+          <input type="file" id="projFormFiles" accept="image/*" multiple onchange="handleProjFileSelection(event)" class="w-full border p-2 rounded-xl bg-[#FAF8F5]" />
+          <div id="projPhotoPreviewContainer" class="flex flex-wrap gap-2 mt-2"></div>
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="විස්තරය (සිංහල)" data-en="Description (Sinhala)">විස්තරය (සිංහල)</label>
+          <textarea id="projDesc" rows="2" class="w-full border p-2.5 rounded-xl font-medium"></textarea>
+        </div>
+        <div>
+          <label class="block font-bold mb-1" data-si="විස්තරය (ඉංග්‍රීසි)" data-en="Description (English)">විස්තරය (ඉංග්‍රීසි)</label>
+          <textarea id="projDescEN" rows="2" class="w-full border p-2.5 rounded-xl font-medium"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-[#8B5A2B] text-white py-3 rounded-xl font-bold cursor-pointer" data-si="ව්‍යාපෘතිය සුරකින්න" data-en="Save Project">Save Project</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    let currentTab = 'home';
+    let workshopSubView = 'main';
+    let isLoggedInAdmin = false;
+    let isAdmin = false;
+    let currentAdminPassword = localStorage.getItem('dilayan_admin_pass') || '1234';
+    let currentLang = 'SI';
+
+    let tempUploadedPhotos = [];
+    let tempProjPhotos = [];
+    let editingProjectId = null;
+    let tempCoverBase64 = '';
+    
+    // Category Section Background Customization State
+    let currentEditingCatSection = '';
+    let currentEditingCatId = '';
+    let tempCatBgBase64 = '';
+
+    let timberCFTPrices = JSON.parse(localStorage.getItem('dilayan_timber_cft_prices')) || {
+      teak: 9500,
+      jack: 8500,
+      mahogany: 7000,
+      all: 8000
+    };
+
+    let pageCovers = JSON.parse(localStorage.getItem('dilayan_page_covers_config')) || {};
+
+    let showroomCats = JSON.parse(localStorage.getItem('dilayan_showroom_cats')) || [
+      { id: 'all', nameSI: 'සියල්ල', nameEN: 'All Furniture' },
+      { id: 'sofas', nameSI: 'සෝෆා සහ වැරැන්ඩා', nameEN: 'Sofas & Veranda' },
+      { id: 'beds', nameSI: 'ඇඳන් සහ මෙට්ට', nameEN: 'Beds & Mattresses' },
+      { id: 'tables', nameSI: 'මේස සහ පුටු', nameEN: 'Tables & Chairs' }
+    ];
+
+    let showroomItems = JSON.parse(localStorage.getItem('dilayan_showroom_items')) || [
+      { id: 1, category: 'sofas', titleSI: 'තේක්ක සුඛෝපභෝගී සෝෆා සෙට් එක', titleEN: 'Teak Luxury Sofa Set', price: 'LKR 185,000', descSI: 'ශක්තිමත් තේක්ක දැවයෙන් සහ සුවපහසු කුෂන් සහිත 3+2+1+1 සෝෆා කට්ටලය.', descEN: 'Robust teak wood 3+2+1+1 sofa set with comfortable cushions.', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80', photos: ['https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80'] }
+    ];
+
+    let workshopCats = JSON.parse(localStorage.getItem('dilayan_workshop_cats')) || [
+      { id: 'all', nameSI: 'සියල්ල', nameEN: 'All Carpentry' },
+      { id: 'frames', nameSI: 'උළුවහු සහ දොරවල්', nameEN: 'Doors & Frames' },
+      { id: 'roofing', nameSI: 'වහලවල් ගැසීම', nameEN: 'Roofing Systems' }
+    ];
+
+    let workshopItems = JSON.parse(localStorage.getItem('dilayan_workshop_items')) || [
+      { id: 101, category: 'frames', titleSI: 'කොස් සහ තේක්ක ප්‍රධාන උළුවහු', titleEN: 'Jack & Teak Main Door Frames', price: 'Est. LKR 35,000+', descSI: 'වේයන්ට ඔරොත්තු දෙන උළුවහු.', descEN: 'Termite resistant door frames.', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', photos: ['https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'] }
+    ];
+
+    let workshopProjects = JSON.parse(localStorage.getItem('dilayan_workshop_projects')) || [
+      { id: 1, titleSI: 'ව්‍යාපෘති 01: මහනුවර දෙමහල් නිවසේ ලී වැඩ', titleEN: 'Project 01: Kandy Two-Story House Woodwork', location: 'Kandy', descSI: 'සම්පූර්ණ නිවසට අවශ්‍ය කොස් ලී උළුවහු සහ වහල ලී වැඩ.', descEN: 'Complete jackwood door frames and roof timber works.', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', photos: ['https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'] }
+    ];
+
+    let timberCats = JSON.parse(localStorage.getItem('dilayan_timber_cats')) || [
+      { id: 'all', nameSI: 'සියල්ල', nameEN: 'All Timber' },
+      { id: 'teak', nameSI: 'තේක්ක (Teak)', nameEN: 'Teak Wood' },
+      { id: 'jack', nameSI: 'කොස් (Jackwood)', nameEN: 'Jack Wood' },
+      { id: 'mahogany', nameSI: 'නදුන් (Mahogany)', nameEN: 'Mahogany Wood' }
+    ];
+
+    let timberItems = JSON.parse(localStorage.getItem('dilayan_timber_items')) || [
+      { id: 201, category: 'teak', titleSI: 'තේක්ක ලී සහ ලෑලි තොග', titleEN: 'Teak Timber & Planks Stock', price: 'LKR 9,500 / CFT', descSI: 'ශක්තිමත් තේක්ක දැව තොග.', descEN: 'Strong teak timber stock.', img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', photos: ['https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'] }
+    ];
+
+    let showroomFilter = 'all';
+    let workshopFilter = 'all';
+    let timberFilter = 'all';
+
+    function saveAllDataToStorage() {
+      localStorage.setItem('dilayan_showroom_cats', JSON.stringify(showroomCats));
+      localStorage.setItem('dilayan_showroom_items', JSON.stringify(showroomItems));
+      localStorage.setItem('dilayan_workshop_cats', JSON.stringify(workshopCats));
+      localStorage.setItem('dilayan_workshop_items', JSON.stringify(workshopItems));
+      localStorage.setItem('dilayan_workshop_projects', JSON.stringify(workshopProjects));
+      localStorage.setItem('dilayan_timber_cats', JSON.stringify(timberCats));
+      localStorage.setItem('dilayan_timber_items', JSON.stringify(timberItems));
+      localStorage.setItem('dilayan_timber_cft_prices', JSON.stringify(timberCFTPrices));
+      localStorage.setItem('dilayan_page_covers_config', JSON.stringify(pageCovers));
+    }
+
+    // Anti-Lag Image Compression Helper
+    function compressAndConvertImage(file, callback, maxWidth = 1000, quality = 0.8) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          callback(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+    window.toggleMobileMenu = toggleMobileMenu;
+
+    function switchTab(tabId) {
+      currentTab = tabId;
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      const targetTab = document.getElementById('tab-' + tabId);
+      if (targetTab) targetTab.classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => { 
+        btn.classList.remove('bg-[#5C3D2E]', 'text-white'); 
+        btn.classList.add('text-[#5C4F46]'); 
+      });
+      const activeNav = document.getElementById('nav-' + tabId);
+      if (activeNav) { 
+        activeNav.classList.remove('text-[#5C4F46]'); 
+        activeNav.classList.add('bg-[#5C3D2E]', 'text-white'); 
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.switchTab = switchTab;
+
+    function switchWorkshopSub(subId) {
+      workshopSubView = subId;
+      document.querySelectorAll('#tab-workshop .sub-view').forEach(el => el.classList.remove('active'));
+      const sub = document.getElementById('workshop-view-' + subId);
+      if (sub) sub.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.switchWorkshopSub = switchWorkshopSub;
+
+    /* LOGO MANAGEMENT */
+    function loadSavedLogo() {
+      const savedLogo = localStorage.getItem('dilayan_logo_url');
+      if (savedLogo) {
+        const headerLogo = document.getElementById('headerLogoImg');
+        const footerLogo = document.getElementById('footerLogoImg');
+        if (headerLogo) headerLogo.src = savedLogo;
+        if (footerLogo) footerLogo.src = savedLogo;
+      }
+    }
+
+    function openLogoModal() {
+      const savedLogo = localStorage.getItem('dilayan_logo_url') || 'https://i.ibb.co/3s8sR45/FB-IMG-1744563822704.jpg';
+      document.getElementById('logoPreviewImg').src = savedLogo;
+      document.getElementById('logoUrlInput').value = savedLogo.startsWith('data:') ? '' : savedLogo;
+      document.getElementById('logoFileInput').value = '';
+      document.getElementById('logoModal').classList.add('active');
+    }
+    window.openLogoModal = openLogoModal;
+
+    function previewLogoFile(e) {
+      const file = e.target.files[0];
+      if (file) {
+        compressAndConvertImage(file, compressed => {
+          document.getElementById('logoPreviewImg').src = compressed;
+        }, 500, 0.85);
+      }
+    }
+    window.previewLogoFile = previewLogoFile;
+
+    function previewLogoUrl(url) {
+      if (url.trim()) document.getElementById('logoPreviewImg').src = url.trim();
+    }
+    window.previewLogoUrl = previewLogoUrl;
+
+    function handleSaveLogo(e) {
+      e.preventDefault();
+      const newLogoSrc = document.getElementById('logoPreviewImg').src;
+      if (newLogoSrc) {
+        localStorage.setItem('dilayan_logo_url', newLogoSrc);
+        loadSavedLogo();
+        closeModal('logoModal');
+        alert(currentLang === 'SI' ? 'ලෝගෝ එක සාර්ථකව සුරකිණි!' : 'Logo updated successfully!');
+      }
+    }
+    window.handleSaveLogo = handleSaveLogo;
+
+    /* COVER PHOTOS */
+    function loadPageCovers() {
+      ['home', 'about', 'workshop', 'shop', 'timber', 'contact'].forEach(page => {
+        const conf = pageCovers[page];
+        const el = document.getElementById('cover-' + page);
+        if (el && conf) {
+          if (conf.url) el.style.backgroundImage = `url('${conf.url}')`;
+          el.style.backgroundSize = `${conf.zoom || 100}%`;
+          el.style.backgroundPosition = `${conf.posX || 50}% ${conf.posY || 50}%`;
+          el.style.filter = `brightness(${conf.brightness || 100}%)`;
+        }
+      });
+    }
+
+    function openCoverPhotoModal() {
+      loadPageCoverConfigIntoModal();
+      document.getElementById('coverPhotoModal').classList.add('active');
+    }
+    window.openCoverPhotoModal = openCoverPhotoModal;
+
+    function previewCoverFile(e) {
+      const file = e.target.files[0];
+      if (file) {
+        compressAndConvertImage(file, compressed => {
+          tempCoverBase64 = compressed;
+          const box = document.getElementById('coverPreviewBox');
+          box.style.backgroundImage = `url('${tempCoverBase64}')`;
+          updateCoverPreviewStyles();
+        });
+      }
+    }
+    window.previewCoverFile = previewCoverFile;
+
+    function loadPageCoverConfigIntoModal() {
+      const pageKey = document.getElementById('coverPageSelect').value;
+      const conf = pageCovers[pageKey] || {
+        url: document.getElementById('cover-' + pageKey)?.style.backgroundImage.slice(5, -2) || '',
+        zoom: 100, posX: 50, posY: 50, brightness: 100
+      };
+
+      tempCoverBase64 = conf.url;
+      document.getElementById('coverZoomInput').value = conf.zoom || 100;
+      document.getElementById('coverBrightInput').value = conf.brightness || 100;
+      document.getElementById('coverPosXInput').value = conf.posX || 50;
+      document.getElementById('coverPosYInput').value = conf.posY || 50;
+      
+      const box = document.getElementById('coverPreviewBox');
+      box.style.backgroundImage = `url('${tempCoverBase64}')`;
+      updateCoverPreviewStyles();
+    }
+    window.loadPageCoverConfigIntoModal = loadPageCoverConfigIntoModal;
+
+    function updateCoverPreviewStyles() {
+      const zoom = document.getElementById('coverZoomInput').value;
+      const bright = document.getElementById('coverBrightInput').value;
+      const posX = document.getElementById('coverPosXInput').value;
+      const posY = document.getElementById('coverPosYInput').value;
+
+      document.getElementById('zoomValText').innerText = zoom + '%';
+      document.getElementById('brightValText').innerText = bright + '%';
+      document.getElementById('posXValText').innerText = posX + '%';
+      document.getElementById('posYValText').innerText = posY + '%';
+
+      const box = document.getElementById('coverPreviewBox');
+      box.style.backgroundSize = `${zoom}%`;
+      box.style.backgroundPosition = `${posX}% ${posY}%`;
+      box.style.filter = `brightness(${bright}%)`;
+    }
+    window.updateCoverPreviewStyles = updateCoverPreviewStyles;
+
+    function handleSaveCoverPhoto(e) {
+      e.preventDefault();
+      const pageKey = document.getElementById('coverPageSelect').value;
+      const zoom = parseInt(document.getElementById('coverZoomInput').value);
+      const brightness = parseInt(document.getElementById('coverBrightInput').value);
+      const posX = parseInt(document.getElementById('coverPosXInput').value);
+      const posY = parseInt(document.getElementById('coverPosYInput').value);
+
+      pageCovers[pageKey] = { url: tempCoverBase64, zoom, posX, posY, brightness };
+      saveAllDataToStorage();
+
+      const el = document.getElementById('cover-' + pageKey);
+      if (el) {
+        el.style.backgroundImage = `url('${tempCoverBase64}')`;
+        el.style.backgroundSize = `${zoom}%`;
+        el.style.backgroundPosition = `${posX}% ${posY}%`;
+        el.style.filter = `brightness(${brightness}%)`;
+      }
+      closeModal('coverPhotoModal');
+      alert(currentLang === 'SI' ? 'Cover Photo සාර්ථකව සුරකිණි!' : 'Cover photo updated!');
+    }
+    window.handleSaveCoverPhoto = handleSaveCoverPhoto;
+
+    /* CATEGORY FULL SECTION BACKGROUND LOGIC */
+    function applyCategorySectionBackground(section, activeCatId) {
+      const wrapper = document.getElementById(`${section}-section-bg-wrapper`);
+      const overlay = document.getElementById(`${section}-section-bg-overlay`);
+      if (!wrapper) return;
+
+      let cats = section === 'showroom' ? showroomCats : (section === 'workshop' ? workshopCats : timberCats);
+      let catObj = cats.find(c => c.id === activeCatId);
+
+      if (catObj && catObj.bgImage) {
+        wrapper.style.backgroundImage = `url('${catObj.bgImage}')`;
+        wrapper.style.backgroundSize = `${catObj.bgZoom || 100}%`;
+        wrapper.style.backgroundPosition = `${catObj.bgPosX || 50}% ${catObj.bgPosY || 50}%`;
+        wrapper.style.filter = `brightness(${catObj.bgBrightness || 100}%)`;
+        if (overlay) overlay.style.backgroundColor = 'rgba(0,0,0,0.15)';
+      } else {
+        wrapper.style.backgroundImage = 'none';
+        wrapper.style.filter = 'none';
+        if (overlay) overlay.style.backgroundColor = 'transparent';
+      }
+
+      // Show Admin Category Background Edit Button if Admin active
+      const adminBtnBox = document.getElementById(`${section}-admin-bg-btn-container`);
+      if (adminBtnBox) {
+        if (isAdmin) {
+          adminBtnBox.classList.remove('hidden');
+          adminBtnBox.classList.add('flex');
+        } else {
+          adminBtnBox.classList.add('hidden');
+          adminBtnBox.classList.remove('flex');
+        }
+      }
+    }
+
+    function openCategoryBgModal(section) {
+      currentEditingCatSection = section;
+      const filterVar = section === 'showroom' ? showroomFilter : (section === 'workshop' ? workshopFilter : timberFilter);
+      currentEditingCatId = filterVar;
+
+      let cats = section === 'showroom' ? showroomCats : (section === 'workshop' ? workshopCats : timberCats);
+      let catObj = cats.find(c => c.id === currentEditingCatId);
+
+      tempCatBgBase64 = catObj?.bgImage || '';
+      document.getElementById('catZoomInput').value = catObj?.bgZoom || 100;
+      document.getElementById('catBrightInput').value = catObj?.bgBrightness || 100;
+      document.getElementById('catPosXInput').value = catObj?.bgPosX || 50;
+      document.getElementById('catPosYInput').value = catObj?.bgPosY || 50;
+
+      const previewBox = document.getElementById('catBgPreviewBox');
+      previewBox.style.backgroundImage = tempCatBgBase64 ? `url('${tempCatBgBase64}')` : '';
+      updateCatBgPreviewStyles();
+
+      // Enable Drag Framing on Preview Box
+      setupDragPreview();
+
+      document.getElementById('categoryBgModal').classList.add('active');
+    }
+    window.openCategoryBgModal = openCategoryBgModal;
+
+    function previewCatBgFile(e) {
+      const file = e.target.files[0];
+      if (file) {
+        compressAndConvertImage(file, compressed => {
+          tempCatBgBase64 = compressed;
+          const box = document.getElementById('catBgPreviewBox');
+          box.style.backgroundImage = `url('${tempCatBgBase64}')`;
+          updateCatBgPreviewStyles();
+        }, 1200, 0.85);
+      }
+    }
+    window.previewCatBgFile = previewCatBgFile;
+
+    function clearCatBgSelection() {
+      tempCatBgBase64 = '';
+      document.getElementById('catBgImageFile').value = '';
+      const box = document.getElementById('catBgPreviewBox');
+      box.style.backgroundImage = 'none';
+    }
+    window.clearCatBgSelection = clearCatBgSelection;
+
+    function updateCatBgPreviewStyles() {
+      const zoom = document.getElementById('catZoomInput').value;
+      const bright = document.getElementById('catBrightInput').value;
+      const posX = document.getElementById('catPosXInput').value;
+      const posY = document.getElementById('catPosYInput').value;
+
+      document.getElementById('catZoomValText').innerText = zoom + '%';
+      document.getElementById('catBrightValText').innerText = bright + '%';
+      document.getElementById('catPosXValText').innerText = posX + '%';
+      document.getElementById('catPosYValText').innerText = posY + '%';
+
+      const box = document.getElementById('catBgPreviewBox');
+      box.style.backgroundSize = `${zoom}%`;
+      box.style.backgroundPosition = `${posX}% ${posY}%`;
+      box.style.filter = `brightness(${bright}%)`;
+    }
+    window.updateCatBgPreviewStyles = updateCatBgPreviewStyles;
+
+    function setupDragPreview() {
+      const box = document.getElementById('catBgPreviewBox');
+      let isDragging = false;
+      let startX, startY, startPosX, startPosY;
+
+      const onMouseDown = (e) => {
+        isDragging = true;
+        startX = e.clientX || (e.touches && e.touches[0].clientX);
+        startY = e.clientY || (e.touches && e.touches[0].clientY);
+        startPosX = parseInt(document.getElementById('catPosXInput').value);
+        startPosY = parseInt(document.getElementById('catPosYInput').value);
+      };
+
+      const onMouseMove = (e) => {
+        if (!isDragging) return;
+        const currentX = e.clientX || (e.touches && e.touches[0].clientX);
+        const currentY = e.clientY || (e.touches && e.touches[0].clientY);
+        const deltaX = currentX - startX;
+        const deltaY = currentY - startY;
+
+        let newPosX = Math.min(100, Math.max(0, startPosX + Math.round(deltaX / 3)));
+        let newPosY = Math.min(100, Math.max(0, startPosY + Math.round(deltaY / 3)));
+
+        document.getElementById('catPosXInput').value = newPosX;
+        document.getElementById('catPosYInput').value = newPosY;
+        updateCatBgPreviewStyles();
+      };
+
+      const onMouseUp = () => { isDragging = false; };
+
+      box.onmousedown = onMouseDown;
+      box.onmousemove = onMouseMove;
+      window.onmouseup = onMouseUp;
+
+      box.ontouchstart = onMouseDown;
+      box.ontouchmove = onMouseMove;
+      window.ontouchend = onMouseUp;
+    }
+
+    function handleSaveCategoryBg(e) {
+      e.preventDefault();
+      let cats = currentEditingCatSection === 'showroom' ? showroomCats : (currentEditingCatSection === 'workshop' ? workshopCats : timberCats);
+      let catObj = cats.find(c => c.id === currentEditingCatId);
+      if (catObj) {
+        catObj.bgImage = tempCatBgBase64;
+        catObj.bgZoom = parseInt(document.getElementById('catZoomInput').value);
+        catObj.bgBrightness = parseInt(document.getElementById('catBrightInput').value);
+        catObj.bgPosX = parseInt(document.getElementById('catPosXInput').value);
+        catObj.bgPosY = parseInt(document.getElementById('catPosYInput').value);
+        saveAllDataToStorage();
+        closeModal('categoryBgModal');
+        renderAll();
+      }
+    }
+    window.handleSaveCategoryBg = handleSaveCategoryBg;
+
+    /* TIMBER CFT PRICES MANAGER */
+    function openTimberPriceModal() {
+      const list = document.getElementById('timberPriceList');
+      list.innerHTML = timberCats.filter(c => c.id !== 'all').map(c => `
+        <div class="flex justify-between items-center bg-[#FAF8F5] p-3 rounded-xl border">
+          <span class="font-bold text-[#3A261C]">${currentLang === 'SI' ? c.nameSI : c.nameEN}</span>
+          <div class="flex items-center gap-1">
+            <span class="font-bold text-gray-500">LKR</span>
+            <input type="number" id="priceInput_${c.id}" value="${timberCFTPrices[c.id] || 8500}" class="w-24 border p-1.5 rounded-lg font-bold text-right" />
+            <span class="text-[10px] text-gray-400">/CFT</span>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('timberPriceModal').classList.add('active');
+    }
+    window.openTimberPriceModal = openTimberPriceModal;
+
+    function saveTimberCFTPrices() {
+      timberCats.filter(c => c.id !== 'all').forEach(c => {
+        const input = document.getElementById('priceInput_' + c.id);
+        if (input) timberCFTPrices[c.id] = parseFloat(input.value) || 8500;
+      });
+      saveAllDataToStorage();
+      closeModal('timberPriceModal');
+      calculateCFT();
+      alert(currentLang === 'SI' ? 'දැව මිල ගණන් සාර්ථකව යාවත්කාලීන විය!' : 'CFT Prices saved!');
+    }
+    window.saveTimberCFTPrices = saveTimberCFTPrices;
+
+    function calculateCFT() {
+      const woodSelect = document.getElementById('calcWoodSelect');
+      const speciesId = woodSelect ? woodSelect.value : 'teak';
+      const unitCFTPrice = timberCFTPrices[speciesId] || 8500;
+
+      const lenFt = parseFloat(document.getElementById('calcLength').value) || 0;
+      const widthIn = parseInt(document.getElementById('calcWidth').value) || 0;
+      
+      const thickInches = parseFloat(document.getElementById('calcThickInches').value) || 0;
+      const thickNool = parseFloat(document.getElementById('calcThickNool').value) || 0;
+      const totalThickInches = thickInches + (thickNool / 8);
+
+      const qty = parseInt(document.getElementById('calcQty').value) || 0;
+
+      const cft = (lenFt * widthIn * totalThickInches * qty) / 144;
+      const sqFt = (lenFt * (widthIn / 12)) * qty;
+      const totalPrice = cft * unitCFTPrice;
+
+      const resCFT = document.getElementById('resCFT');
+      const resSqFt = document.getElementById('resSqFt');
+      const resPrice = document.getElementById('resPrice');
+      const resNote = document.getElementById('resUnitPriceNote');
+
+      if (resCFT) resCFT.innerText = cft.toFixed(2);
+      if (resSqFt) resSqFt.innerText = sqFt.toFixed(1);
+      if (resPrice) resPrice.innerText = `LKR ${totalPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+      
+      if (resNote) {
+        resNote.innerText = currentLang === 'SI' 
+          ? `* 1 CFT = LKR ${unitCFTPrice.toLocaleString()} (තෝරාගත් දැව වර්ගය අනුව).`
+          : `* Current Rate: LKR ${unitCFTPrice.toLocaleString()} per CFT.`;
+      }
+    }
+    window.calculateCFT = calculateCFT;
+
+    /* ITEM MANAGEMENT WITH PHOTO REORDERING */
+    function openAddItemModal(section, itemId = null) {
+      document.getElementById('editItemTargetSection').value = section;
+      document.getElementById('editItemId').value = itemId || '';
+      tempUploadedPhotos = [];
+
+      const titleInput = document.getElementById('itemFormTitle');
+      const titleENInput = document.getElementById('itemFormTitleEN');
+      const priceInput = document.getElementById('itemFormPrice');
+      const catSelect = document.getElementById('itemFormCategory');
+      const descInput = document.getElementById('itemFormDesc');
+      const descENInput = document.getElementById('itemFormDescEN');
+
+      let currentCats = section === 'showroom' ? showroomCats : (section === 'workshop' ? workshopCats : timberCats);
+      catSelect.innerHTML = currentCats.filter(c => c.id !== 'all').map(c => `<option value="${c.id}">${currentLang === 'SI' ? c.nameSI : c.nameEN}</option>`).join('');
+
+      if (itemId) {
+        let item = (section === 'showroom' ? showroomItems : (section === 'workshop' ? workshopItems : timberItems)).find(i => i.id === itemId);
+        if (item) {
+          titleInput.value = item.titleSI || item.title || '';
+          titleENInput.value = item.titleEN || item.title || '';
+          priceInput.value = item.price || '';
+          catSelect.value = item.category || '';
+          descInput.value = item.descSI || item.desc || '';
+          descENInput.value = item.descEN || item.desc || '';
+          tempUploadedPhotos = item.photos ? [...item.photos] : [item.img];
+        }
+      } else {
+        titleInput.value = ''; titleENInput.value = ''; priceInput.value = ''; descInput.value = ''; descENInput.value = '';
+        if (currentCats.length > 1) catSelect.value = currentCats[1].id;
+      }
+      renderItemPhotoPreviews();
+      document.getElementById('addItemModal').classList.add('active');
+    }
+    window.openAddItemModal = openAddItemModal;
+
+    function handleItemFileSelection(e) {
+      const files = Array.from(e.target.files);
+      let loadedCount = 0;
+      files.forEach(file => {
+        compressAndConvertImage(file, compressed => {
+          tempUploadedPhotos.push(compressed);
+          loadedCount++;
+          if (loadedCount === files.length) {
+            renderItemPhotoPreviews();
+          }
+        }, 1000, 0.85);
+      });
+    }
+    window.handleItemFileSelection = handleItemFileSelection;
+
+    function renderItemPhotoPreviews() {
+      document.getElementById('itemPhotoPreviewContainer').innerHTML = tempUploadedPhotos.map((src, idx) => `
+        <div class="relative group bg-gray-50 border p-1 rounded-xl flex flex-col items-center">
+          <img src="${src}" class="w-16 h-16 object-cover rounded-lg mb-1"/>
+          <div class="flex items-center gap-1">
+            ${idx > 0 ? `<button type="button" onclick="movePhotoSequence(${idx}, -1)" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">◀</button>` : ''}
+            ${idx < tempUploadedPhotos.length - 1 ? `<button type="button" onclick="movePhotoSequence(${idx}, 1)" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-1.5 py-0.5 rounded text-[10px] font-bold cursor-pointer">▶</button>` : ''}
+            <button type="button" onclick="tempUploadedPhotos.splice(${idx},1);renderItemPhotoPreviews();" class="bg-red-600 hover:bg-red-700 text-white w-5 h-5 rounded-full text-[10px] font-bold cursor-pointer flex items-center justify-center">✕</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    window.renderItemPhotoPreviews = renderItemPhotoPreviews;
+
+    function movePhotoSequence(index, direction) {
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= tempUploadedPhotos.length) return;
+      const item = tempUploadedPhotos.splice(index, 1)[0];
+      tempUploadedPhotos.splice(targetIndex, 0, item);
+      renderItemPhotoPreviews();
+    }
+    window.movePhotoSequence = movePhotoSequence;
+
+    function handleSaveItemForm(e) {
+      e.preventDefault();
+      const section = document.getElementById('editItemTargetSection').value;
+      const itemIdStr = document.getElementById('editItemId').value;
+      const titleSI = document.getElementById('itemFormTitle').value.trim();
+      const titleEN = document.getElementById('itemFormTitleEN').value.trim();
+      const price = document.getElementById('itemFormPrice').value.trim();
+      const category = document.getElementById('itemFormCategory').value;
+      const descSI = document.getElementById('itemFormDesc').value.trim();
+      const descEN = document.getElementById('itemFormDescEN').value.trim();
+      const defaultImg = tempUploadedPhotos.length > 0 ? tempUploadedPhotos[0] : 'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=800&q=80';
+
+      const itemData = {
+        id: itemIdStr ? parseInt(itemIdStr) : Date.now(),
+        category,
+        titleSI, titleEN, title: currentLang === 'SI' ? titleSI : titleEN,
+        price: price || 'Est. Quote',
+        descSI, descEN, desc: currentLang === 'SI' ? descSI : descEN,
+        img: defaultImg,
+        photos: tempUploadedPhotos.length > 0 ? tempUploadedPhotos : [defaultImg]
+      };
+
+      if (section === 'showroom') {
+        if (itemIdStr) showroomItems = showroomItems.map(i => i.id === itemData.id ? itemData : i); else showroomItems.unshift(itemData);
+      } else if (section === 'workshop') {
+        if (itemIdStr) workshopItems = workshopItems.map(i => i.id === itemData.id ? itemData : i); else workshopItems.unshift(itemData);
+      } else if (section === 'timber') {
+        if (itemIdStr) timberItems = timberItems.map(i => i.id === itemData.id ? itemData : i); else timberItems.unshift(itemData);
+      }
+      saveAllDataToStorage();
+      closeModal('addItemModal');
+      renderAll();
+    }
+    window.handleSaveItemForm = handleSaveItemForm;
+
+    function deleteItem(section, id) {
+      if (!confirm(currentLang === 'SI' ? 'මෙම අයිටම් එක ඩිලීට් කරන්නද?' : 'Delete this item?')) return;
+      if (section === 'showroom') showroomItems = showroomItems.filter(i => i.id !== id);
+      if (section === 'workshop') workshopItems = workshopItems.filter(i => i.id !== id);
+      if (section === 'timber') timberItems = timberItems.filter(i => i.id !== id);
+      saveAllDataToStorage();
+      renderAll();
+    }
+    window.deleteItem = deleteItem;
+
+    function deleteCategory(section, catId) {
+      if (catId === 'all') return;
+      if (!confirm(currentLang === 'SI' ? 'මෙම කැටගරිය ඩිලීට් කරන්නද?' : 'Delete category?')) return;
+      if (section === 'showroom') showroomCats = showroomCats.filter(c => c.id !== catId);
+      if (section === 'workshop') workshopCats = workshopCats.filter(c => c.id !== catId);
+      if (section === 'timber') timberCats = timberCats.filter(c => c.id !== catId);
+      saveAllDataToStorage();
+      renderAll();
+    }
+    window.deleteCategory = deleteCategory;
+
+    function closeModal(id) { 
+      const m = document.getElementById(id);
+      if (m) m.classList.remove('active'); 
+    }
+    window.closeModal = closeModal;
+
+    function openAdminLoginModal() { document.getElementById('adminLoginModal').classList.add('active'); }
+    window.openAdminLoginModal = openAdminLoginModal;
+
+    function openChangePassModal() { document.getElementById('changePassModal').classList.add('active'); }
+    window.openChangePassModal = openChangePassModal;
+
+    function openAddProjectModal(projectId = null) {
+      editingProjectId = projectId;
+      tempProjPhotos = [];
+      const titleInput = document.getElementById('projTitle');
+      const titleENInput = document.getElementById('projTitleEN');
+      const locInput = document.getElementById('projLocation');
+      const descInput = document.getElementById('projDesc');
+      const descENInput = document.getElementById('projDescEN');
+
+      if (projectId) {
+        let proj = workshopProjects.find(p => p.id === projectId);
+        if (proj) {
+          titleInput.value = proj.titleSI || proj.title || '';
+          titleENInput.value = proj.titleEN || proj.title || '';
+          locInput.value = proj.location || '';
+          descInput.value = proj.descSI || proj.desc || '';
+          descENInput.value = proj.descEN || proj.desc || '';
+          tempProjPhotos = proj.photos ? [...proj.photos] : [proj.img];
+        }
+      } else {
+        titleInput.value = ''; titleENInput.value = ''; locInput.value = ''; descInput.value = ''; descENInput.value = '';
+      }
+      renderProjPhotoPreviews();
+      document.getElementById('projectModal').classList.add('active');
+    }
+    window.openAddProjectModal = openAddProjectModal;
+
+    function handleProjFileSelection(e) {
+      const files = Array.from(e.target.files);
+      let loaded = 0;
+      files.forEach(file => {
+        compressAndConvertImage(file, compressed => {
+          tempProjPhotos.push(compressed);
+          loaded++;
+          if (loaded === files.length) renderProjPhotoPreviews();
+        }, 1000, 0.85);
+      });
+    }
+    window.handleProjFileSelection = handleProjFileSelection;
+
+    function renderProjPhotoPreviews() {
+      document.getElementById('projPhotoPreviewContainer').innerHTML = tempProjPhotos.map((src, idx) => `
+        <div class="relative"><img src="${src}" class="w-14 h-14 object-cover rounded-lg border"/><button type="button" onclick="tempProjPhotos.splice(${idx},1);renderProjPhotoPreviews();" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white w-5 h-5 rounded-full text-[10px] font-bold cursor-pointer">✕</button></div>
+      `).join('');
+    }
+    window.renderProjPhotoPreviews = renderProjPhotoPreviews;
+
+    function saveProject(e) {
+      e.preventDefault();
+      const titleSI = document.getElementById('projTitle').value.trim();
+      const titleEN = document.getElementById('projTitleEN').value.trim();
+      const location = document.getElementById('projLocation').value.trim();
+      const descSI = document.getElementById('projDesc').value.trim();
+      const descEN = document.getElementById('projDescEN').value.trim();
+      const defaultImg = tempProjPhotos.length > 0 ? tempProjPhotos[0] : 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80';
+
+      const projData = {
+        id: editingProjectId ? editingProjectId : Date.now(),
+        titleSI, titleEN, title: currentLang === 'SI' ? titleSI : titleEN,
+        location: location || 'Warakapola',
+        descSI, descEN, desc: currentLang === 'SI' ? descSI : descEN,
+        img: defaultImg,
+        photos: tempProjPhotos.length > 0 ? tempProjPhotos : [defaultImg]
+      };
+
+      if (editingProjectId) workshopProjects = workshopProjects.map(p => p.id === projData.id ? projData : p);
+      else workshopProjects.unshift(projData);
+
+      saveAllDataToStorage();
+      closeModal('projectModal');
+      renderWorkshop();
+    }
+    window.saveProject = saveProject;
+
+    function deleteProject(id) {
+      if (!confirm(currentLang === 'SI' ? 'මෙම ව්‍යාපෘතිය ඩිලීට් කරන්නද?' : 'Delete project?')) return;
+      workshopProjects = workshopProjects.filter(p => p.id !== id);
+      saveAllDataToStorage();
+      renderWorkshop();
+    }
+    window.deleteProject = deleteProject;
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'SI' ? 'EN' : 'SI';
+      document.getElementById('langBtnText').innerText = currentLang === 'SI' ? 'English' : 'සිංහල';
+
+      document.querySelectorAll('[data-si]').forEach(el => {
+        const val = currentLang === 'SI' ? el.getAttribute('data-si') : el.getAttribute('data-en');
+        if (val) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+          else el.innerHTML = val;
+        }
+      });
+      renderAll();
+    }
+    window.toggleLanguage = toggleLanguage;
+
+    function addCategoryPrompt(section) {
+      document.getElementById('addCategoryTargetSection').value = section;
+      document.getElementById('catNameSI').value = '';
+      document.getElementById('catNameEN').value = '';
+      document.getElementById('addCategoryModal').classList.add('active');
+    }
+    window.addCategoryPrompt = addCategoryPrompt;
+
+    function toggleAdminMode() {
+      if (!isLoggedInAdmin) { openAdminLoginModal(); return; }
+      isAdmin = !isAdmin;
+      ['adminBtnWorkshop', 'adminBtnShowroom', 'adminBtnTimber'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.innerText = isAdmin ? '✓ Edit Mode Active' : '✏️ Enable Edit Mode';
+          if (isAdmin) { btn.classList.add('bg-[#8B5A2B]', 'text-white'); btn.classList.remove('bg-white'); }
+          else { btn.classList.remove('bg-[#8B5A2B]', 'text-white'); btn.classList.add('bg-white'); }
+        }
+      });
+      renderAll();
+    }
+    window.toggleAdminMode = toggleAdminMode;
+
+    function handleSaveNewCategoryForm(e) {
+      e.preventDefault();
+      const section = document.getElementById('addCategoryTargetSection').value;
+      const nameSI = document.getElementById('catNameSI').value.trim();
+      const nameEN = document.getElementById('catNameEN').value.trim();
+      if (!nameSI || !nameEN) return;
+      const id = nameEN.toLowerCase().replace(/\s+/g, '_');
+      const newCat = { id, nameSI, nameEN };
+      if (section === 'showroom') showroomCats.push(newCat);
+      if (section === 'workshop') workshopCats.push(newCat);
+      if (section === 'timber') timberCats.push(newCat);
+      saveAllDataToStorage();
+      closeModal('addCategoryModal');
+      renderAll();
+    }
+    window.handleSaveNewCategoryForm = handleSaveNewCategoryForm;
+
+    function handleAdminLogin(e) {
+      if (e) e.preventDefault();
+      const pass = document.getElementById('adminPassInput').value;
+      if (pass === currentAdminPassword) {
+        isAdmin = true; isLoggedInAdmin = true;
+        document.getElementById('adminTopControlBar').classList.remove('hidden');
+        document.querySelectorAll('#workshop-admin-bar, #showroom-admin-bar, #timber-admin-bar, #addProjBtn, #adminPriceDirectBtn').forEach(el => el.classList.remove('hidden'));
+        closeModal('adminLoginModal');
+        document.getElementById('adminPassInput').value = '';
+        alert(currentLang === 'SI' ? 'සාර්ථකව ඇඩ්මින් ලෙස පිවිසුණි!' : 'Logged in successfully!');
+        renderAll();
+      } else { alert(currentLang === 'SI' ? 'වැරදි මුරපදයක්!' : 'Incorrect Password!'); }
+    }
+    window.handleAdminLogin = handleAdminLogin;
+
+    function logoutAdmin() {
+      isAdmin = false; isLoggedInAdmin = false;
+      document.getElementById('adminTopControlBar').classList.add('hidden');
+      document.querySelectorAll('#workshop-admin-bar, #showroom-admin-bar, #timber-admin-bar, #addProjBtn, #adminPriceDirectBtn').forEach(el => el.classList.add('hidden'));
+      renderAll();
+    }
+    window.logoutAdmin = logoutAdmin;
+
+    function handleChangePassword(e) {
+      if (e) e.preventDefault();
+      if (document.getElementById('oldPassInput').value === currentAdminPassword) {
+        currentAdminPassword = document.getElementById('newPassInput').value.trim();
+        localStorage.setItem('dilayan_admin_pass', currentAdminPassword);
+        closeModal('changePassModal');
+        alert(currentLang === 'SI' ? 'මුරපදය සාර්ථකව වෙනස් කර සුරකින ලදී!' : 'Password changed successfully!');
+      } else { alert(currentLang === 'SI' ? 'පැරණි මුරපදය වැරදියි!' : 'Wrong current password!'); }
+    }
+    window.handleChangePassword = handleChangePassword;
+
+    function handleContactFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactFormName').value;
+      const phone = document.getElementById('contactFormPhone').value;
+      const service = document.getElementById('contactFormService').value;
+      const msg = document.getElementById('contactFormMsg').value || '-';
+      window.open(`https://wa.me/94772256044?text=${encodeURIComponent(`*Inquiry*\nName: ${name}\nPhone: ${phone}\nService: ${service}\nMsg: ${msg}`)}`, '_blank');
+    }
+    window.handleContactFormSubmit = handleContactFormSubmit;
+
+    function renderShowroom() {
+      const container = document.getElementById('showroom-cat-container');
+      if (container) {
+        container.innerHTML = showroomCats.map(c => `
+          <div class="inline-flex items-center gap-1">
+            <button onclick="showroomFilter='${c.id}'; renderShowroom();" class="px-3.5 py-2 rounded-full text-xs font-bold ${showroomFilter === c.id ? 'bg-[#5C3D2E] text-white shadow-md' : 'bg-white border border-[#E0D5C7] text-[#5C4F46]'} cursor-pointer transition">${currentLang === 'SI' ? c.nameSI : c.nameEN}</button>
+            ${isAdmin && c.id !== 'all' ? `<button onclick="deleteCategory('showroom','${c.id}')" class="bg-red-500 text-white p-1 rounded-full text-[10px] cursor-pointer">✕</button>` : ''}
+          </div>
+        `).join('') + (isAdmin ? `<button onclick="addCategoryPrompt('showroom')" class="bg-[#8B5A2B] text-white px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer">+ Cat</button>` : '');
+      }
+
+      applyCategorySectionBackground('showroom', showroomFilter);
+
+      const grid = document.getElementById('showroom-items-grid');
+      if (grid) {
+        const filtered = showroomFilter === 'all' ? showroomItems : showroomItems.filter(i => i.category === showroomFilter);
+        grid.innerHTML = filtered.map(i => `
+          <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-[#E0D5C7] p-4 shadow-md relative flex flex-col justify-between group hover:shadow-xl transition">
+            ${isAdmin ? `<div class="absolute top-2 left-2 flex gap-1 z-10"><button onclick="openAddItemModal('showroom',${i.id})" class="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer">Edit</button><button onclick="deleteItem('showroom',${i.id})" class="bg-red-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer">Delete</button></div>` : ''}
+            <div onclick="showItemDetail('showroom',${i.id})" class="cursor-pointer">
+              <div class="h-48 w-full rounded-xl overflow-hidden mb-3 bg-gray-100">
+                <img src="${i.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              </div>
+              <h3 class="font-bold text-[#3A261C] text-base mb-1">${currentLang === 'SI' ? (i.titleSI || i.title) : (i.titleEN || i.title)}</h3>
+              <p class="text-xs text-gray-600 mb-3 line-clamp-2">${currentLang === 'SI' ? (i.descSI || i.desc) : (i.descEN || i.desc)}</p>
+            </div>
+            <div class="border-t pt-3 flex justify-between items-center"><span class="text-xs font-bold text-[#8B5A2B]">${i.price}</span><button onclick="showItemDetail('showroom',${i.id})" class="bg-[#F4EAD4] text-[#5C3D2E] px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer transition">${currentLang === 'SI' ? 'විස්තර' : 'Details'}</button></div>
+          </div>
+        `).join('');
+      }
+    }
+    window.renderShowroom = renderShowroom;
+
+    function renderWorkshop() {
+      const container = document.getElementById('workshop-cat-container');
+      if (container) {
+        container.innerHTML = workshopCats.map(c => `
+          <div class="inline-flex items-center gap-1">
+            <button onclick="workshopFilter='${c.id}'; renderWorkshop();" class="px-3.5 py-2 rounded-full text-xs font-bold ${workshopFilter === c.id ? 'bg-[#5C3D2E] text-white shadow-md' : 'bg-white border border-[#E0D5C7] text-[#5C4F46]'} cursor-pointer transition">${currentLang === 'SI' ? c.nameSI : c.nameEN}</button>
+            ${isAdmin && c.id !== 'all' ? `<button onclick="deleteCategory('workshop','${c.id}')" class="bg-red-500 text-white p-1 rounded-full text-[10px] cursor-pointer">✕</button>` : ''}
+          </div>
+        `).join('') + (isAdmin ? `<button onclick="addCategoryPrompt('workshop')" class="bg-[#8B5A2B] text-white px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer">+ Cat</button>` : '');
+      }
+
+      applyCategorySectionBackground('workshop', workshopFilter);
+
+      const grid = document.getElementById('workshop-items-grid');
+      if (grid) {
+        const filtered = workshopFilter === 'all' ? workshopItems : workshopItems.filter(i => i.category === workshopFilter);
+        grid.innerHTML = filtered.map(i => `
+          <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-[#E0D5C7] p-4 shadow-md relative flex flex-col justify-between group hover:shadow-xl transition">
+            ${isAdmin ? `<div class="absolute top-2 left-2 flex gap-1 z-10"><button onclick="openAddItemModal('workshop',${i.id})" class="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer">Edit</button><button onclick="deleteItem('workshop',${i.id})" class="bg-red-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer">Delete</button></div>` : ''}
+            <div onclick="showItemDetail('workshop',${i.id})" class="cursor-pointer">
+              <div class="h-48 w-full rounded-xl overflow-hidden mb-3 bg-gray-100">
+                <img src="${i.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              </div>
+              <h3 class="font-bold text-[#3A261C] text-base mb-1">${currentLang === 'SI' ? (i.titleSI || i.title) : (i.titleEN || i.title)}</h3>
+              <p class="text-xs text-gray-600 mb-3 line-clamp-2">${currentLang === 'SI' ? (i.descSI || i.desc) : (i.descEN || i.desc)}</p>
+            </div>
+            <div class="border-t pt-3 flex justify-between items-center"><button onclick="showItemDetail('workshop',${i.id})" class="bg-[#F4EAD4] text-[#5C3D2E] px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer transition">${currentLang === 'SI' ? 'විස්තර' : 'Details'}</button><a href="https://wa.me/94772256044" target="_blank" rel="noopener noreferrer" class="bg-[#25D366] text-white px-3.5 py-2 rounded-xl text-xs font-bold transition">WhatsApp</a></div>
+          </div>
+        `).join('');
+      }
+
+      const projGrid = document.getElementById('workshop-projects-grid');
+      if (projGrid) {
+        projGrid.innerHTML = workshopProjects.map(p => `
+          <div class="bg-white/10 border border-white/10 rounded-2xl p-4 relative flex flex-col justify-between group">
+            ${isAdmin ? `<div class="absolute top-2 left-2 flex gap-1 z-10"><button onclick="openAddProjectModal(${p.id})" class="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer">Edit</button><button onclick="deleteProject(${p.id})" class="bg-red-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer">Delete</button></div>` : ''}
+            <div onclick="showProjectPhotos(${p.id})" class="cursor-pointer">
+              <div class="h-52 w-full rounded-xl overflow-hidden mb-3 bg-black/40">
+                <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              </div>
+              <h3 class="font-bold text-base text-white mb-1">${currentLang === 'SI' ? (p.titleSI || p.title) : (p.titleEN || p.title)}</h3>
+              <p class="text-xs text-[#D4C3B3] mb-3 line-clamp-2">${currentLang === 'SI' ? (p.descSI || p.desc) : (p.descEN || p.desc)}</p>
+            </div>
+            <div class="pt-3 border-t border-white/10 flex justify-between items-center"><span class="text-[10px] bg-[#8B5A2B] text-white px-2.5 py-1 rounded-full font-bold">📍 ${p.location}</span><button onclick="showProjectPhotos(${p.id})" class="bg-[#D4A373] text-[#2D1B14] font-bold text-xs px-4 py-2 rounded-xl cursor-pointer transition">📸 ${currentLang === 'SI' ? 'ගැලරිය බලන්න' : 'View Gallery'}</button></div>
+          </div>
+        `).join('');
+      }
+    }
+    window.renderWorkshop = renderWorkshop;
+
+    function renderTimber() {
+      const container = document.getElementById('timber-cat-container');
+      if (container) {
+        container.innerHTML = timberCats.map(c => `
+          <div class="inline-flex items-center gap-1">
+            <button onclick="timberFilter='${c.id}'; renderTimber();" class="px-3.5 py-2 rounded-full text-xs font-bold ${timberFilter === c.id ? 'bg-[#5C3D2E] text-white shadow-md' : 'bg-white border border-[#E0D5C7] text-[#5C4F46]'} cursor-pointer transition">${currentLang === 'SI' ? c.nameSI : c.nameEN}</button>
+            ${isAdmin && c.id !== 'all' ? `<button onclick="deleteCategory('timber','${c.id}')" class="bg-red-500 text-white p-1 rounded-full text-[10px] cursor-pointer">✕</button>` : ''}
+          </div>
+        `).join('') + (isAdmin ? `<button onclick="addCategoryPrompt('timber')" class="bg-[#8B5A2B] text-white px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer">+ Cat</button>` : '');
+      }
+
+      applyCategorySectionBackground('timber', timberFilter);
+
+      const select = document.getElementById('calcWoodSelect');
+      if (select) {
+        select.innerHTML = timberCats.filter(c => c.id !== 'all').map(c => `<option value="${c.id}">${currentLang === 'SI' ? c.nameSI : c.nameEN}</option>`).join('');
+      }
+
+      const grid = document.getElementById('timber-items-grid');
+      if (grid) {
+        const filtered = timberFilter === 'all' ? timberItems : timberItems.filter(i => i.category === timberFilter);
+        grid.innerHTML = filtered.map(i => `
+          <div class="bg-white/95 backdrop-blur-sm rounded-2xl border border-[#E0D5C7] p-4 shadow-md relative flex flex-col justify-between group hover:shadow-xl transition">
+            ${isAdmin ? `<div class="absolute top-2 left-2 flex gap-1 z-10"><button onclick="openAddItemModal('timber',${i.id})" class="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer">Edit</button><button onclick="deleteItem('timber',${i.id})" class="bg-red-600 text-white px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer">Delete</button></div>` : ''}
+            <div onclick="showItemDetail('timber',${i.id})" class="cursor-pointer">
+              <div class="h-48 w-full rounded-xl overflow-hidden mb-3 bg-gray-100">
+                <img src="${i.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+              </div>
+              <h3 class="font-bold text-[#3A261C] text-base mb-1">${currentLang === 'SI' ? (i.titleSI || i.title) : (i.titleEN || i.title)}</h3>
+              <p class="text-xs text-gray-600 mb-3 line-clamp-2">${currentLang === 'SI' ? (i.descSI || i.desc) : (i.descEN || i.desc)}</p>
+            </div>
+            <div class="border-t pt-3 flex justify-between items-center"><span class="text-xs font-bold text-[#8B5A2B]">${i.price}</span><button onclick="showItemDetail('timber',${i.id})" class="bg-[#F4EAD4] text-[#5C3D2E] px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer transition">${currentLang === 'SI' ? 'විස්තර' : 'Details'}</button></div>
+          </div>
+        `).join('');
+      }
+    }
+    window.renderTimber = renderTimber;
+
+    function showItemDetail(section, id) {
+      let item = (section === 'showroom' ? showroomItems : (section === 'workshop' ? workshopItems : timberItems)).find(i => i.id === id);
+      if (!item) return;
+      const photos = item.photos || [item.img];
+      
+      const imgEl = document.getElementById('detailImg');
+      const videoEl = document.getElementById('detailVideo');
+      if (videoEl) { videoEl.pause(); videoEl.classList.add('hidden'); }
+      if (imgEl) { imgEl.src = photos[0]; imgEl.classList.remove('hidden'); }
+
+      document.getElementById('detailTitle').innerText = currentLang === 'SI' ? (item.titleSI || item.title) : (item.titleEN || item.title);
+      document.getElementById('detailPrice').innerText = item.price || '';
+      document.getElementById('detailDesc').innerText = currentLang === 'SI' ? (item.descSI || item.desc) : (item.descEN || item.desc);
+      document.getElementById('detailThumbnails').innerHTML = photos.map(src => {
+        const isVideo = src.endsWith('.mp4') || src.endsWith('.webm') || src.includes('video');
+        return isVideo 
+          ? `<div onclick="switchDetailMedia('${src}', true)" class="w-16 h-16 rounded-xl border bg-black text-white flex items-center justify-center text-xs font-bold cursor-pointer shrink-0">▶ Video</div>`
+          : `<img src="${src}" onclick="switchDetailMedia('${src}', false)" class="w-16 h-16 object-cover rounded-xl border cursor-pointer hover:opacity-80 transition shrink-0"/>`;
+      }).join('');
+      document.getElementById('detailModal').classList.add('active');
+    }
+    window.showItemDetail = showItemDetail;
+
+    function showProjectPhotos(id) {
+      let proj = workshopProjects.find(p => p.id === id);
+      if (!proj) return;
+      const photos = proj.photos || [proj.img];
+      
+      const imgEl = document.getElementById('detailImg');
+      const videoEl = document.getElementById('detailVideo');
+      if (videoEl) { videoEl.pause(); videoEl.classList.add('hidden'); }
+      if (imgEl) { imgEl.src = photos[0]; imgEl.classList.remove('hidden'); }
+
+      document.getElementById('detailTitle').innerText = currentLang === 'SI' ? (proj.titleSI || proj.title) : (proj.titleEN || proj.title);
+      document.getElementById('detailPrice').innerText = `📍 ${proj.location}`;
+      document.getElementById('detailDesc').innerText = currentLang === 'SI' ? (proj.descSI || proj.desc) : (proj.descEN || proj.desc);
+      document.getElementById('detailThumbnails').innerHTML = photos.map(src => {
+        const isVideo = src.endsWith('.mp4') || src.endsWith('.webm') || src.includes('video');
+        return isVideo 
+          ? `<div onclick="switchDetailMedia('${src}', true)" class="w-16 h-16 rounded-xl border bg-black text-white flex items-center justify-center text-xs font-bold cursor-pointer shrink-0">▶ Video</div>`
+          : `<img src="${src}" onclick="switchDetailMedia('${src}', false)" class="w-16 h-16 object-cover rounded-xl border cursor-pointer hover:opacity-80 transition shrink-0"/>`;
+      }).join('');
+      document.getElementById('detailModal').classList.add('active');
+    }
+    window.showProjectPhotos = showProjectPhotos;
+
+    function switchDetailMedia(src, isVideo) {
+      const imgEl = document.getElementById('detailImg');
+      const videoEl = document.getElementById('detailVideo');
+      if (isVideo) {
+        if (imgEl) imgEl.classList.add('hidden');
+        if (videoEl) {
+          videoEl.src = src;
+          videoEl.classList.remove('hidden');
+          videoEl.play();
+        }
+      } else {
+        if (videoEl) { videoEl.pause(); videoEl.classList.add('hidden'); }
+        if (imgEl) {
+          imgEl.src = src;
+          imgEl.classList.remove('hidden');
+        }
+      }
+    }
+    window.switchDetailMedia = switchDetailMedia;
+
+    function renderAll() {
+      renderShowroom();
+      renderWorkshop();
+      renderTimber();
+      calculateCFT();
+    }
+    window.renderAll = renderAll;
+
+    window.onload = function() {
+      loadSavedLogo();
+      loadPageCovers();
+      renderAll();
+    };
+  </script>
+</body>
+</html>
